@@ -1,0 +1,329 @@
+﻿<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NIEBLA | Branding Sonoro de Alto Nivel</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&amp;family=Manrope:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a11217",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#0A0A0A",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "serif": ["Cormorant Garamond", "serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>body {
+    background-color: #0A0A0A;
+    color: #F2F2F2;
+    font-family: "Manrope", sans-serif;
+    overflow-x: hidden
+    }
+.serif-heading {
+    font-family: "Cormorant Garamond", serif
+    }
+.sound-wave-bg {
+    background-image: radial-gradient(circle at 2px 2px, rgba(161, 18, 23, 0.05) 1px, transparent 0);
+    background-size: 40px 40px
+    }
+.grain-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0.03;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuC5j7L22t9KpOUTQaw5WmkUPrb5tsSwJTSzfi-bv5oeJrwyD7iIFXprvdqSJcoO2cUp1kRxWmNE4y7RQ_aAhGds0mexOi28zyz8VN3HSMe3lfwDPrMTf3bZQsk1xsk18Pfe9DGU5Nzp3EZWuHVh9RJJwWyopyBfUfGj5MZMmpyhmvStC5rXNpZEtEWSSPzjdiRZA2ORR8TL1lWz3UhBaN95ft3v8vqV1fWH_rNGiRdr-fGAXCZdC8AoXsH9lZ3WO-AtFsgmLciCEsP2)
+    }
+.divider-red {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #a11217, transparent)
+    }</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 selection:bg-primary selection:text-white">
+<div class="grain-overlay"></div>
+<!-- Navigation -->
+<header class="fixed top-0 w-full z-40 border-b border-white/5 bg-background-dark/80 backdrop-blur-md">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img alt="NIEBLA SOUND-BRANDING" class="h-24 w-auto" src="./assets/img/NIEBLA SOUND-BRANDING.png"/>
+</div>
+<nav class="hidden md:flex items-center gap-10 text-[11px] font-bold tracking-[0.15em] uppercase opacity-70">
+<a class="hover:text-primary transition-colors" href="#quienes-somos">Quiénes somos</a>
+<a class="hover:text-primary transition-colors" href="#que-hacemos">Qué hacemos</a>
+<a class="hover:text-primary transition-colors" href="#como-trabajamos">Cómo trabajamos</a>
+<a class="hover:text-primary transition-colors" href="#clientes">Clientes</a>
+</nav>
+<button class="bg-primary hover:bg-red-700 text-white px-6 py-2.5 rounded text-[11px] font-bold tracking-widest uppercase transition-all duration-300">
+                Conversemos
+            </button>
+</div>
+</header>
+<main class="sound-wave-bg">
+<!-- Hero Section -->
+<section class="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-20">
+<div class="absolute inset-0 overflow-hidden pointer-events-none">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/10 blur-[120px] rounded-full"></div>
+</div>
+<div class="max-w-4xl relative z-10">
+<span class="inline-block text-primary font-bold tracking-[0.3em] uppercase text-[10px] mb-6">High-End Sonic Branding</span>
+<h2 class="serif-heading text-5xl md:text-8xl leading-[1.1] mb-8 font-light italic">
+                    Branding sonoro con criterio <span class="font-normal italic">creativo</span> y precisión <span class="font-normal italic">técnica</span>.
+                </h2>
+<p class="text-lg md:text-xl font-light opacity-60 mb-12 max-w-2xl mx-auto leading-relaxed">
+                    Agencia especializada en identidad sonora estratégica. Diseñamos la voz de las marcas que buscan trascender lo visual.
+                </p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+<button class="bg-primary hover:shadow-[0_0_20px_rgba(161,18,23,0.4)] text-white px-10 py-4 rounded font-bold tracking-widest uppercase transition-all duration-500">
+                        Conversemos
+                    </button>
+<a class="group flex items-center gap-3 text-[11px] font-bold tracking-[0.2em] uppercase opacity-50 hover:opacity-100 transition-opacity" href="#que-hacemos">
+                        Explorar servicios
+                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Scroll Indicator -->
+<div class="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-20 flex flex-col items-center gap-2">
+<span class="text-[9px] uppercase tracking-widest">Scroll</span>
+<div class="w-[1px] h-12 bg-white"></div>
+</div>
+</section>
+<!-- Quiénes Somos Section -->
+<section class="py-32 px-6 max-w-7xl mx-auto" id="quienes-somos">
+<div class="grid md:grid-cols-2 gap-20 items-center">
+<div class="relative aspect-square bg-zinc-900 rounded-lg overflow-hidden">
+<img alt="Studio detail" class="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-700" data-alt="Close up of professional audio equipment in a dark studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7_QxwK2D0zDTZzuDwYyz2E0wPfzi07gXtUsIa4ALvDKzoItvdbon47xr9U0av0SEoSo_9dYNlcrO_YS8ewIL48UUoKgtxBs86knGiSyzQ4U361Qmkg1h2RF4qJ6UZBaZKWmxVlILo_PRVfb9hH2PjBHU2ZU4x1dt35YhTvtngcY91RTnOrIR8fghMJGKkzCLsGhY1B_N7QlovrTtZFplsdP2bbGbP_BVZh8ITbo7wAy59bIGaxr_iSdtO-ddUu25_sLHdEs-0A25k"/>
+<img alt="Quienes Somos" class="absolute inset-0 w-full h-full object-cover" src="./assets/img/QuienesSomos.png"/>
+</div>
+<div>
+<h3 class="text-primary font-bold tracking-widest text-xs uppercase mb-6">Quiénes Somos</h3>
+<h4 class="serif-heading text-4xl md:text-5xl mb-8 leading-tight">Creatividad artística con rigurosidad técnica.</h4>
+<p class="text-lg opacity-60 mb-10 leading-relaxed font-light">
+                        En Niebla, nos enfocamos en la esencia sonora de cada marca. No solo producimos audio; destilamos la identidad corporativa en frecuencias audibles que generan conexión emocional y recordación inmediata.
+                    </p>
+<ul class="space-y-6 mb-12">
+<li class="flex gap-4 items-start">
+<span class="text-primary material-symbols-outlined">analytics</span>
+<div>
+<h5 class="font-bold text-sm uppercase tracking-wide mb-1">Análisis Estratégico</h5>
+<p class="text-sm opacity-50">Auditoría sónica profunda para alinear el sonido con los valores de marca.</p>
+</div>
+</li>
+<li class="flex gap-4 items-start">
+<span class="text-primary material-symbols-outlined">waves</span>
+<div>
+<h5 class="font-bold text-sm uppercase tracking-wide mb-1">Diseño de Autor</h5>
+<p class="text-sm opacity-50">Composiciones exclusivas que evitan los clichés de las librerías genéricas.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="mt-32 text-center max-w-5xl mx-auto border-y border-white/5 py-24">
+<h2 class="serif-heading text-3xl md:text-5xl italic font-light leading-relaxed">
+                    "Un gran sonido no solo se escucha: se <span class="text-primary">reconoce</span>, se recuerda y se siente."
+                </h2>
+</div>
+</section>
+<!-- Qué Hacemos Section -->
+<section class="py-32 bg-[#0d0d0d]" id="que-hacemos">
+<div class="max-w-7xl mx-auto px-6">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+<div class="max-w-2xl">
+<h3 class="text-primary font-bold tracking-widest text-xs uppercase mb-6">Qué Hacemos</h3>
+<h4 class="serif-heading text-4xl md:text-6xl">Servicios de precisión sónica.</h4>
+</div>
+<p class="text-sm opacity-50 max-w-xs font-light leading-relaxed">
+                        Soluciones integrales para marcas que entienden el impacto del audio en la experiencia de usuario.
+                    </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-primary/30">
+<!-- Item 1 -->
+<div class="p-8 border-b md:border-b-0 md:border-r border-primary/20 hover:bg-primary/5 transition-colors group">
+<span class="text-primary/40 text-4xl font-light mb-8 block">01</span>
+<h5 class="text-xl font-bold mb-6 uppercase tracking-tight">Producción Musical</h5>
+<ul class="space-y-3 text-xs opacity-50 font-bold tracking-wider">
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> COMPOSICIÓN ORIGINAL</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> ARREGLOS ORQUESTALES</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> PRODUCCIÓN DE ARTISTAS</li>
+</ul>
+</div>
+<!-- Item 2 -->
+<div class="p-8 border-b md:border-b-0 md:border-r border-primary/20 hover:bg-primary/5 transition-colors group">
+<span class="text-primary/40 text-4xl font-light mb-8 block">02</span>
+<h5 class="text-xl font-bold mb-6 uppercase tracking-tight">Producción Comercial</h5>
+<ul class="space-y-3 text-xs opacity-50 font-bold tracking-wider">
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> SPOTS DE TV / RADIO</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> POST-PRODUCCIÓN</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> LOCUCIÓN PROFESIONAL</li>
+</ul>
+</div>
+<!-- Item 3 -->
+<div class="p-8 border-b md:border-b-0 md:border-r border-primary/20 hover:bg-primary/5 transition-colors group">
+<span class="text-primary/40 text-4xl font-light mb-8 block">03</span>
+<h5 class="text-xl font-bold mb-6 uppercase tracking-tight">Branding Sonoro</h5>
+<ul class="space-y-3 text-xs opacity-50 font-bold tracking-wider">
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> LOGOTIPOS SÓNICOS</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> AUDIO LOGOS</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> CURADURÍA MUSICAL</li>
+</ul>
+</div>
+<!-- Item 4 -->
+<div class="p-8 hover:bg-primary/5 transition-colors group">
+<span class="text-primary/40 text-4xl font-light mb-8 block">04</span>
+<h5 class="text-xl font-bold mb-6 uppercase tracking-tight">Diseño Sonoro</h5>
+<ul class="space-y-3 text-xs opacity-50 font-bold tracking-wider">
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> SFX PERSONALIZADOS</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> UX/UI SOUNDS</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> ATMÓSFERAS 3D</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Diferencial -->
+<section class="py-32 px-6">
+<div class="max-w-4xl mx-auto text-center border border-white/10 p-16 rounded-xl bg-white/[0.02]">
+<h4 class="text-3xl md:text-5xl serif-heading mb-10 italic">"No improvisamos: diseñamos sonido con <span class="text-primary">intención</span>."</h4>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-primary mb-4">biotech</span>
+<p class="text-xs uppercase tracking-widest font-bold">Arquitectura de Audio</p>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-primary mb-4">psychology</span>
+<p class="text-xs uppercase tracking-widest font-bold">Psicología Auditiva</p>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-primary mb-4">verified</span>
+<p class="text-xs uppercase tracking-widest font-bold">Fidelidad Absoluta</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Cómo Trabajamos -->
+<section class="py-32 overflow-hidden" id="como-trabajamos">
+<div class="max-w-7xl mx-auto px-6">
+<h3 class="text-primary font-bold tracking-widest text-xs uppercase mb-16 text-center">Nuestro Proceso</h3>
+<div class="relative">
+<!-- Process Line -->
+<div class="absolute top-[21px] left-0 w-full h-[1px] bg-white/10 hidden lg:block"></div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 relative z-10">
+<!-- Step 1 -->
+<div class="group">
+<div class="w-11 h-11 bg-background-dark border border-primary text-primary flex items-center justify-center rounded-full mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300 mx-auto lg:mx-0">1</div>
+<h6 class="text-sm font-bold uppercase tracking-widest mb-4 text-center lg:text-left">Escuchamos</h6>
+<p class="text-xs opacity-50 leading-relaxed text-center lg:text-left">Inmersión profunda en la marca, sus competidores y sus objetivos.</p>
+</div>
+<!-- Step 2 -->
+<div class="group">
+<div class="w-11 h-11 bg-background-dark border border-white/20 text-white/40 flex items-center justify-center rounded-full mb-8 group-hover:border-primary group-hover:text-primary transition-all duration-300 mx-auto lg:mx-0">2</div>
+<h6 class="text-sm font-bold uppercase tracking-widest mb-4 text-center lg:text-left">Definimos</h6>
+<p class="text-xs opacity-50 leading-relaxed text-center lg:text-left">Establecemos el ADN sónico y las directrices estratégicas.</p>
+</div>
+<!-- Step 3 -->
+<div class="group">
+<div class="w-11 h-11 bg-background-dark border border-white/20 text-white/40 flex items-center justify-center rounded-full mb-8 group-hover:border-primary group-hover:text-primary transition-all duration-300 mx-auto lg:mx-0">3</div>
+<h6 class="text-sm font-bold uppercase tracking-widest mb-4 text-center lg:text-left">Creamos</h6>
+<p class="text-xs opacity-50 leading-relaxed text-center lg:text-left">Composición y diseño de propuestas creativas originales.</p>
+</div>
+<!-- Step 4 -->
+<div class="group">
+<div class="w-11 h-11 bg-background-dark border border-white/20 text-white/40 flex items-center justify-center rounded-full mb-8 group-hover:border-primary group-hover:text-primary transition-all duration-300 mx-auto lg:mx-0">4</div>
+<h6 class="text-sm font-bold uppercase tracking-widest mb-4 text-center lg:text-left">Refinamos</h6>
+<p class="text-xs opacity-50 leading-relaxed text-center lg:text-left">Ajustes técnicos y pruebas de aplicación en diversos medios.</p>
+</div>
+<!-- Step 5 -->
+<div class="group">
+<div class="w-11 h-11 bg-background-dark border border-white/20 text-white/40 flex items-center justify-center rounded-full mb-8 group-hover:border-primary group-hover:text-primary transition-all duration-300 mx-auto lg:mx-0">5</div>
+<h6 class="text-sm font-bold uppercase tracking-widest mb-4 text-center lg:text-left">Entregamos</h6>
+<p class="text-xs opacity-50 leading-relaxed text-center lg:text-left">Manual de uso sónico y activos finales en alta fidelidad.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- A quiénes trabajamos -->
+<section class="py-32 bg-white/[0.01]" id="clientes">
+<div class="max-w-7xl mx-auto px-6">
+<h3 class="text-primary font-bold tracking-widest text-xs uppercase mb-16 text-center">A quiénes trabajamos</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 opacity-40">
+<div class="border-l border-white/10 pl-6 py-4 hover:opacity-100 transition-opacity">
+<span class="text-xs uppercase font-bold tracking-[0.2em]">Agencias de Publicidad</span>
+</div>
+<div class="border-l border-white/10 pl-6 py-4 hover:opacity-100 transition-opacity">
+<span class="text-xs uppercase font-bold tracking-[0.2em]">Productoras de Cine</span>
+</div>
+<div class="border-l border-white/10 pl-6 py-4 hover:opacity-100 transition-opacity">
+<span class="text-xs uppercase font-bold tracking-[0.2em]">Marcas Luxury</span>
+</div>
+<div class="border-l border-white/10 pl-6 py-4 hover:opacity-100 transition-opacity">
+<span class="text-xs uppercase font-bold tracking-[0.2em]">Startups Tech</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Compromiso & Final CTA -->
+<section class="relative py-40 px-6 overflow-hidden">
+<div class="absolute inset-0 bg-primary/5"></div>
+<div class="max-w-4xl mx-auto text-center relative z-10">
+<h4 class="serif-heading text-4xl md:text-6xl mb-12 italic">Eleve la dimensión sensorial de su marca hoy mismo.</h4>
+<p class="text-lg opacity-60 mb-16 max-w-2xl mx-auto font-light">
+                    Nuestro compromiso es la excelencia. Cada proyecto es una oportunidad para redefinir el estándar de calidad en el branding sonoro contemporáneo.
+                </p>
+<div class="inline-block p-1 bg-white/5 rounded-lg">
+<button class="bg-primary hover:bg-red-700 text-white px-12 py-6 rounded font-bold tracking-[0.2em] uppercase transition-all duration-300 shadow-2xl">
+                        Iniciar Proyecto
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<footer class="py-20 border-t border-white/5 bg-background-dark">
+<div class="max-w-7xl mx-auto px-6">
+<div class="flex flex-col md:flex-row justify-between items-center gap-12">
+<div class="flex items-center gap-3">
+<img alt="NIEBLA SOUND-BRANDING" class="h-16 w-auto" src="./assets/img/NIEBLA SOUND-BRANDING.png"/>
+</div>
+<div class="text-[10px] uppercase tracking-widest opacity-40 font-bold">
+                    © 2024 Niebla Sonic Agency. Todos los derechos reservados.
+                </div>
+<div class="flex gap-8 opacity-60">
+<a class="hover:text-primary transition-colors text-xs font-bold tracking-widest" href="#">INSTAGRAM</a>
+<a class="hover:text-primary transition-colors text-xs font-bold tracking-widest" href="#">LINKEDIN</a>
+<a class="hover:text-primary transition-colors text-xs font-bold tracking-widest" href="#">BEHANCE</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
+
+
+
+
+
+
+
+

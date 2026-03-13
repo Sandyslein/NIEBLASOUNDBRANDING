@@ -1,0 +1,14 @@
+﻿{
+  "name": "niebla-sound-branding",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "http-server src -p 3000 -c-1",
+    "build": "node scripts/build.mjs",
+    "preview": "http-server dist -p 4173 -c-1"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
