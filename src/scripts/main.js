@@ -1,4 +1,23 @@
-﻿document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
+  // Contador de vistas (CountAPI: incrementa y devuelve el total)
+  const viewCountEl = document.getElementById("view-count");
+  if (viewCountEl) {
+    const counterNamespace = "niebla";
+    const counterKey = "soundbranding";
+    const hitUrl = `https://api.countapi.xyz/hit/${counterNamespace}/${counterKey}`;
+
+    fetch(hitUrl)
+      .then((res) => res.json())
+      .then((data) => {
+        if (typeof data.value === "number") {
+          viewCountEl.textContent = data.value.toLocaleString("es");
+        }
+      })
+      .catch(() => {
+        viewCountEl.textContent = "—";
+      });
+  }
+
   const menuToggle = document.getElementById("mobile-menu-toggle");
   const mobileNav = document.getElementById("mobile-nav");
   const menuIcon = menuToggle ? menuToggle.querySelector("span") : null;
