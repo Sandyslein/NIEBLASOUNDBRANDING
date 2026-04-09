@@ -1,0 +1,16 @@
+{
+  "name": "NIEBLA | Branding Sonoro de Alto Nivel para Marcas",
+  "short_name": "NIEBLA",
+  "start_url": "https://nieblasoundbranding.com/",
+  "scope": "https://nieblasoundbranding.com/",
+  "display": "standalone",
+  "background_color": "#0A0A0A",
+  "theme_color": "#0A0A0A",
+  "icons": [
+    {
+      "src": "https://nieblasoundbranding.com/assets/img/NIEBLA%20SOUND-BRANDING.png?v=3",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

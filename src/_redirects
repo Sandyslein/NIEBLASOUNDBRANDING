@@ -1,0 +1,4 @@
+/index.html https://nieblasoundbranding.com/ 301
+http://nieblasoundbranding.com/* https://nieblasoundbranding.com/:splat 301
+http://www.nieblasoundbranding.com/* https://nieblasoundbranding.com/:splat 301
+https://www.nieblasoundbranding.com/* https://nieblasoundbranding.com/:splat 301
