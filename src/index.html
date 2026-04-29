@@ -101,9 +101,9 @@
 <a class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded" href="#main-content">Saltar al contenido principal</a>
 <div class="grain-overlay"></div>
 <!-- Navigation -->
-<header class="fixed top-0 w-full z-40 border-b border-white/5 bg-background-dark/80 backdrop-blur-md">
-<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-<div class="flex items-center gap-3">
+<header class="site-header fixed top-0 w-full z-40 border-b border-white/5 bg-background-dark/80 backdrop-blur-md">
+<div class="site-header__shell max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<div class="site-header__left flex items-center gap-3">
 <img
   alt="NIEBLA SOUND-BRANDING"
   class="h-20 w-auto"
@@ -112,8 +112,8 @@
   width="212"
   height="80"
   decoding="async"/>
-<a href="https://wa.me/3046196073?text=Hola%2C%20quiero%20mi%20branding%20sonoro" target="_blank" rel="noopener noreferrer" aria-label="Conversemos por WhatsApp" class="inline-block bg-primary hover:bg-primary-dark hover:shadow-[0_0_20px_rgba(161,18,23,0.35)] text-white px-5 py-2.5 rounded text-[10px] font-bold tracking-[0.14em] uppercase transition-all duration-300 text-center">
-                Conversemos
+<a href="https://wa.me/3046196073?text=Hola%2C%20quiero%20iniciar%20mi%20proyecto%20de%20branding%20sonoro." target="_blank" rel="noopener noreferrer" aria-label="Iniciar proyecto por WhatsApp" class="inline-block bg-primary hover:bg-primary-dark hover:shadow-[0_0_20px_rgba(161,18,23,0.35)] text-white px-5 py-2.5 rounded text-[10px] font-bold tracking-[0.14em] uppercase transition-all duration-300 text-center">
+                Iniciar proyecto
             </a>
 <button
   id="mobile-menu-toggle"
@@ -124,87 +124,159 @@
 <span class="material-symbols-outlined text-lg">menu</span>
 </button>
 </div>
-<nav class="hidden md:flex items-center gap-10 text-[11px] font-bold tracking-[0.15em] uppercase text-subtle" aria-label="Navegación principal">
-<a class="hover:text-primary transition-colors" href="#quienes-somos" aria-label="Ir a sección Quiénes somos">Quiénes somos</a>
-<a class="hover:text-primary transition-colors" href="#que-hacemos" aria-label="Ir a sección Qué hacemos">Qué hacemos</a>
-<a class="hover:text-primary transition-colors" href="#como-trabajamos" aria-label="Ir a sección Cómo trabajamos">Cómo trabajamos</a>
-<a class="hover:text-primary transition-colors" href="#clientes" aria-label="Ir a sección A quiénes trabajamos">Clientes</a>
+<nav class="site-header__nav hidden md:flex items-center gap-8 text-[11px] font-bold tracking-[0.15em] uppercase text-subtle" aria-label="Navegación principal">
+<a class="site-header__link hover:text-primary transition-colors" href="#quienes-somos" aria-label="Ir a sección Quiénes somos">Quiénes somos</a>
+<a class="site-header__link hover:text-primary transition-colors" href="#que-hacemos" aria-label="Ir a sección Qué hacemos">Qué hacemos</a>
+<a class="site-header__link hover:text-primary transition-colors" href="#como-trabajamos" aria-label="Ir a sección Cómo trabajamos">Cómo trabajamos</a>
+<a class="site-header__link hover:text-primary transition-colors" href="#clientes" aria-label="Ir a sección A quiénes trabajamos">Clientes</a>
+<a class="nav-music-link hover:text-primary transition-colors inline-flex items-center gap-1.5" href="#canciones" aria-label="Ir a sección Cotizar canciones"><span class="material-symbols-outlined text-[13px]" aria-hidden="true">music_note</span>Cotizar canciones</a>
 </nav>
 </div>
 </header>
 <nav
   id="mobile-nav"
-  class="md:hidden hidden fixed top-20 left-0 right-0 z-30 border-t border-white/10 bg-background-dark/95 backdrop-blur-md"
+  class="site-header__mobile md:hidden hidden fixed top-20 left-0 right-0 z-30 border-t border-white/10 bg-background-dark/95 backdrop-blur-md"
   aria-label="Navegación móvil">
-<div class="max-w-7xl mx-auto px-6 py-5 flex flex-col gap-4 text-[11px] font-bold tracking-[0.15em] uppercase text-subtle">
-<a class="hover:text-primary transition-colors" href="#quienes-somos" aria-label="Ir a sección Quiénes somos">Quiénes somos</a>
-<a class="hover:text-primary transition-colors" href="#que-hacemos" aria-label="Ir a sección Qué hacemos">Qué hacemos</a>
-<a class="hover:text-primary transition-colors" href="#como-trabajamos" aria-label="Ir a sección Cómo trabajamos">Cómo trabajamos</a>
-<a class="hover:text-primary transition-colors" href="#clientes" aria-label="Ir a sección A quiénes trabajamos">Clientes</a>
+<div class="site-header__mobile-inner max-w-7xl mx-auto px-6 py-5 flex flex-col gap-4 text-[11px] font-bold tracking-[0.15em] uppercase text-subtle">
+<a class="site-header__link hover:text-primary transition-colors" href="#quienes-somos" aria-label="Ir a sección Quiénes somos">Quiénes somos</a>
+<a class="site-header__link hover:text-primary transition-colors" href="#que-hacemos" aria-label="Ir a sección Qué hacemos">Qué hacemos</a>
+<a class="site-header__link hover:text-primary transition-colors" href="#como-trabajamos" aria-label="Ir a sección Cómo trabajamos">Cómo trabajamos</a>
+<a class="site-header__link hover:text-primary transition-colors" href="#clientes" aria-label="Ir a sección A quiénes trabajamos">Clientes</a>
+<a class="nav-music-link hover:text-primary transition-colors inline-flex items-center gap-1.5" href="#canciones" aria-label="Ir a sección Cotizar canciones"><span class="material-symbols-outlined text-[13px]" aria-hidden="true">music_note</span>Cotizar canciones</a>
 </div>
 </nav>
 <main class="sound-wave-bg" id="main-content">
 <!-- Hero Section -->
-<section class="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-20">
-<div class="absolute inset-0 overflow-hidden pointer-events-none">
-<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[260px] sm:w-[460px] sm:h-[300px] md:w-[620px] md:h-[330px] lg:w-[800px] lg:h-[400px] bg-primary/10 blur-[120px] rounded-full"></div>
+<section class="hero-premium hero-premium--v2 relative min-h-screen overflow-hidden px-6 pt-20">
+<div class="hero-ambience absolute inset-0 pointer-events-none" aria-hidden="true">
+<div class="hero-aura hero-aura--left"></div>
+<div class="hero-aura hero-aura--right"></div>
+<div class="hero-noise hero-noise-soft-bg"></div>
 </div>
-<div class="max-w-4xl relative z-10">
-<span class="inline-block text-primary font-bold tracking-[0.3em] uppercase text-[10px] mb-6">High-End Sonic Branding</span>
-<h1 class="serif-heading text-[clamp(2.2rem,7vw,5.2rem)] leading-[1.05] md:leading-[1.05] mb-8 font-light italic">
-                    Branding sonoro con criterio <span class="font-normal italic">creativo</span> y precisión <span class="font-normal italic">técnica</span>.
-                </h1>
-<p class="text-base sm:text-lg md:text-xl font-light text-subtle mb-10 sm:mb-12 max-w-2xl mx-auto leading-relaxed hero-summary">
-                    No es solo un audio logo: es un <strong class="text-[var(--n-ink-100)] font-normal">sistema de identidad sonora</strong> que recorre todos los puntos de contacto de la marca. Diseñamos la voz que conecta y se recuerda.
-                </p>
-<div class="flex flex-col sm:flex-row items-center justify-center gap-6">
-<a href="https://wa.me/3046196073?text=Hola%2C%20quiero%20mi%20branding%20sonoro" target="_blank" rel="noopener noreferrer" aria-label="Conversemos por WhatsApp" class="inline-block bg-primary hover:bg-primary-dark hover:shadow-[0_0_20px_rgba(161,18,23,0.4)] text-white px-10 py-4 rounded font-bold tracking-widest uppercase transition-all duration-300 text-center">
-                        Conversemos
-                    </a>
-<a class="group flex items-center gap-3 text-[11px] font-bold tracking-[0.2em] uppercase text-subtle hover:opacity-100 transition-opacity" href="#que-hacemos">
-                        Explorar servicios
-                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+<p class="hero-editorial-rail hero-editorial-rail--left" aria-hidden="true">Sound. Strategy. Identity.</p>
+<p class="hero-editorial-rail hero-editorial-rail--right" aria-hidden="true">Sonic Branding Studio</p>
+
+<div class="hero-premium__stage relative z-10 max-w-7xl mx-auto">
+<div class="hero-premium__grid">
+<div class="hero-copy-column">
+<span class="hero-kicker inline-block text-primary font-bold tracking-[0.32em] uppercase text-[10px] sm:text-[11px] mb-6">Branding sonoro premium</span>
+<h1 class="hero-headline hero-headline--v2-premium serif-heading font-light italic text-[clamp(2.55rem,6.6vw,5.15rem)] leading-[1.14] tracking-[-0.02em] mb-8">
+<span class="hero-headline__line hero-headline__line--1"><span class="hero-headline__inner">Tu marca también</span></span>
+<span class="hero-headline__line hero-headline__line--2"><span class="hero-headline__inner">se <span class="hero-headline__accent hero-headline__accent--kw font-normal not-italic">escucha</span> y</span></span>
+<span class="hero-headline__line hero-headline__line--3"><span class="hero-headline__inner">también <span class="hero-headline__accent hero-headline__accent--kw font-normal not-italic">vende</span>.</span></span>
+</h1>
+<p class="hero-summary hero-summary--v2 text-base sm:text-lg md:text-[1.0625rem] font-light text-subtle mb-7 max-w-[34rem] leading-[1.72]">
+No es audio por decorar: es <strong class="text-[var(--n-ink-100)] font-normal">percepción estratégica</strong> para que tu marca sea reconocida, recordada y preferida desde el primer segundo.
+</p>
+<p class="hero-quick-value mb-8 text-[0.76rem] sm:text-[0.82rem] uppercase tracking-[0.14em] text-white/58">En 3 pasos: estrategia, composición e implementación.</p>
+<div class="hero-cta-row flex flex-col sm:flex-row sm:items-center gap-6">
+<a href="https://wa.me/3046196073?text=Hola%2C%20quiero%20iniciar%20mi%20proyecto%20de%20branding%20sonoro." target="_blank" rel="noopener noreferrer" aria-label="Iniciar proyecto por WhatsApp" class="hero-cta-wa hero-cta-wa--v2 inline-block bg-primary hover:bg-primary-dark text-white px-10 py-4 rounded font-bold tracking-widest uppercase text-center">
+Iniciar proyecto ahora
+</a>
+<a class="hero-secondary-link hero-secondary-link--v2 group inline-flex items-center gap-3 text-[11px] font-bold tracking-[0.2em] uppercase text-subtle transition-[color,letter-spacing,transform] duration-300 hover:text-[var(--n-ink-100)]" href="https://wa.me/3046196073?text=Hola%2C%20quiero%20agendar%20una%20asesor%C3%ADa%20de%20branding%20sonoro." target="_blank" rel="noopener noreferrer">
+Hablemos por WhatsApp
+<span class="material-symbols-outlined text-sm transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
 </a>
 </div>
+<p class="hero-cta-micro mt-6 max-w-[28rem] text-[0.78rem] sm:text-[0.82rem] font-light leading-relaxed tracking-[0.01em] text-white/42">Cupos limitados por semana · estándar premium.</p>
 </div>
-<!-- Scroll Indicator -->
-<div class="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-35 flex flex-col items-center gap-2">
+
+<div class="hero-visual-sculpt" aria-hidden="true">
+<span class="hero-visual-sculpt__index">01</span>
+<div class="hero-visual-sculpt__frame">
+<span class="hero-waveform-glow"></span>
+<div id="hero-audio-reactive" class="hero-audio-console" data-audio-state="idle">
+<div class="hero-audio-console__activate-cluster">
+<p id="hero-audio-ambiente-policy" class="hero-audio-console__policy" aria-live="polite">
+Para que el analizador reaccione al sonido real de tu entorno (voz, música, ruido de la sala), el navegador necesita permiso de micrófono. Solo puede pedírtelo de forma segura tras un gesto tuyo en esta página: es una política de seguridad del propio navegador, no del sitio. El audio se analiza solo en tu dispositivo para animar estas ondas; no se graba ni se envía a ningún servidor.
+</p>
+<span id="hero-audio-live-indicator" class="hero-audio-console__indicator" aria-live="polite" hidden>Escuchando ambiente</span>
+<button type="button" id="hero-audio-enable" class="hero-audio-console__enable" aria-describedby="hero-audio-ambiente-policy">
+Activar sonido ambiente
+</button>
+</div>
+<div class="hero-audio-console__grid"></div>
+<div class="hero-audio-console__stage hero-audio-console__stage--top">
+<div class="hero-audio-console__mic hero-audio-console__mic--left" data-hero-mic>
+<span class="hero-audio-console__mic-head"></span><span class="hero-audio-console__mic-neck"></span><span class="hero-audio-console__mic-base"></span>
+</div>
+<div class="hero-audio-console__mic hero-audio-console__mic--right" data-hero-mic>
+<span class="hero-audio-console__mic-head"></span><span class="hero-audio-console__mic-neck"></span><span class="hero-audio-console__mic-base"></span>
+</div>
+</div>
+<div class="hero-audio-console__stage hero-audio-console__stage--bottom">
+<div class="hero-audio-polar">
+<svg class="hero-audio-polar__svg" viewBox="0 0 360 360" aria-hidden="true">
+<circle class="hero-audio-polar__ring hero-audio-polar__ring--outer" cx="180" cy="180" r="132"></circle>
+<circle class="hero-audio-polar__ring hero-audio-polar__ring--mid" cx="180" cy="180" r="102"></circle>
+<g id="hero-audio-radial-bars" class="hero-audio-polar__bars"></g>
+<path id="hero-audio-ring-main" class="hero-audio-polar__trace hero-audio-polar__trace--main" d=""></path>
+<path id="hero-audio-ring-secondary" class="hero-audio-polar__trace hero-audio-polar__trace--secondary" d=""></path>
+<circle class="hero-audio-polar__core" cx="180" cy="180" r="34"></circle>
+</svg>
+</div>
+<svg class="hero-audio-console__wave hero-audio-console__wave--floor" viewBox="0 0 520 100" preserveAspectRatio="none" aria-hidden="true">
+<path id="hero-audio-floor-wave" class="hero-audio-wave hero-audio-wave--secondary" d=""></path>
+</svg>
+<div class="hero-audio-console__signal-dots">
+<span class="hero-audio-dot"></span><span class="hero-audio-dot"></span><span class="hero-audio-dot"></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="hero-scroll absolute bottom-10 left-1/2 -translate-x-1/2 opacity-35 flex flex-col items-center gap-2">
 <span class="text-[9px] uppercase tracking-widest">Scroll</span>
 <div class="w-[1px] h-12 bg-white"></div>
 </div>
 </section>
-<!-- Valor: por qué el sonido -->
-<section class="py-12 sm:py-16 border-b border-white/5">
-<div class="max-w-4xl mx-auto px-6 text-center">
-<p class="text-sm sm:text-base text-subtle font-light leading-relaxed">
-Las marcas que articulan una identidad sonora coherente generan más <span class="text-[var(--n-ink-100)]">reconocimiento</span>, <span class="text-[var(--n-ink-100)]">recordación</span> y conexión emocional en cada punto de contacto.
-</p>
+<section class="value-benefits py-8 sm:py-10 px-6 border-b border-white/5">
+<div class="max-w-5xl mx-auto value-benefits__grid">
+<article class="value-benefit"><h3>Más atención</h3><p>Tu marca destaca en segundos.</p></article>
+<article class="value-benefit"><h3>Más memoria</h3><p>Sonido propio que se recuerda.</p></article>
+<article class="value-benefit"><h3>Más acción</h3><p>Mayor intención de contacto y compra.</p></article>
 </div>
 </section>
 <!-- Quiénes Somos Section -->
-<section class="py-20 sm:py-24 md:py-32 px-6 max-w-7xl mx-auto" id="quienes-somos">
-<div class="grid md:grid-cols-2 gap-20 items-center">
-<div class="relative aspect-square bg-surface-card rounded-lg overflow-hidden">
-<img
-  alt="Detalle de estudio en Quiénes Somos"
-  class="w-full h-full object-cover"
-  src="./assets/img/QuienesSomos.png"
-  srcset="
-    ./assets/img/QuienesSomos-500w.png 500w,
-    ./assets/img/QuienesSomos-800w.png 800w,
-    ./assets/img/QuienesSomos-1200w.png 1200w"
-  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-  loading="lazy"
-  decoding="async"
-  fetchpriority="low" />
+<section class="py-14 sm:py-16 md:py-20 px-6 max-w-7xl mx-auto" id="quienes-somos">
+<div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+<div class="quienes-sonic-viz relative aspect-square bg-surface-card rounded-lg overflow-hidden" aria-hidden="true">
+<div id="quienes-sonic-console" class="quienes-sonic-console">
+<div class="quienes-sonic-console__bg"></div>
+<div id="quienes-sonic-bars" class="quienes-sonic-bars"></div>
+<svg id="quienes-sonic-wave" class="quienes-sonic-wave" viewBox="0 0 600 220" preserveAspectRatio="none">
+<defs>
+<linearGradient id="quienesSpectrumFillGrad" x1="0" y1="0" x2="0" y2="1" gradientUnits="userSpaceOnUse">
+<stop offset="0%" stop-color="rgba(34, 120, 75, 0.45)"></stop>
+<stop offset="45%" stop-color="rgba(20, 80, 90, 0.22)"></stop>
+<stop offset="78%" stop-color="rgba(161, 18, 23, 0.35)"></stop>
+<stop offset="100%" stop-color="rgba(8, 8, 10, 0.95)"></stop>
+</linearGradient>
+<pattern id="quienesSpectrumGrid" width="72" height="22" patternUnits="userSpaceOnUse">
+<path d="M 72 0 L 0 0 0 22" stroke="rgba(255,255,255,0.065)" stroke-width="1" fill="none"></path>
+</pattern>
+</defs>
+<rect class="quienes-sonic-wave__grid-layer" width="600" height="220" fill="url(#quienesSpectrumGrid)" opacity="0.55" aria-hidden="true"></rect>
+<path id="quienes-sonic-wave-fill" class="quienes-sonic-wave__fill" d="" aria-hidden="true"></path>
+<path id="quienes-sonic-wave-accent" class="quienes-sonic-wave__accent" d="" aria-hidden="true"></path>
+<path id="quienes-sonic-wave-path" d=""></path>
+</svg>
+<div class="quienes-sonic-controls">
+<div class="quienes-sonic-meter"><span data-q-meter></span></div>
+<div class="quienes-sonic-knob" data-q-knob></div>
+<div class="quienes-sonic-slider"><span data-q-slider></span></div>
+</div>
+</div>
 </div>
 <div>
 <h2 class="text-primary font-bold tracking-widest text-xs uppercase mb-6">Quiénes Somos</h2>
-<h3 class="serif-heading text-[clamp(2rem,6vw,3.125rem)] mb-8 leading-tight">Creatividad artística con rigurosidad técnica.</h3>
+<h3 class="serif-heading text-[clamp(2rem,6vw,3.125rem)] mb-8 leading-tight">No improvisamos: diseñamos percepción de marca.</h3>
 <p class="text-base sm:text-lg text-subtle mb-8 sm:mb-10 leading-relaxed font-light">
-                        Las marcas multisensoriales resuenan más. En Niebla partimos de la estrategia de marca —no solo de la música— para construir una identidad sonora integral: desde el audio logo hasta la música en espera, las señales de producto y la voz en cada punto de contacto.
+                        Combinamos estrategia, psicología auditiva y producción de autor para construir una identidad sonora integral: desde el audio logo hasta cada señal, interfaz o experiencia de contacto.
                     </p>
-<ul class="space-y-6 mb-12">
+<ul class="space-y-5 mb-8">
 <li class="flex gap-4 items-start">
 <span class="text-primary material-symbols-outlined">analytics</span>
 <div>
@@ -222,22 +294,17 @@ Las marcas que articulan una identidad sonora coherente generan más <span class
 </ul>
 </div>
 </div>
-<div class="mt-32 text-center max-w-5xl mx-auto border-y border-white/5 py-24">
-<blockquote class="serif-heading text-2xl sm:text-3xl md:text-5xl italic font-light leading-relaxed">
-<p>"Un gran sonido no solo se escucha: se <span class="text-primary">reconoce</span>, se recuerda y se siente."</p>
-</blockquote>
-</div>
 </section>
 <!-- Qué Hacemos Section -->
-<section class="py-20 sm:py-24 md:py-32 bg-surface-darker" id="que-hacemos">
+<section class="py-14 sm:py-16 md:py-20 bg-surface-darker" id="que-hacemos">
 <div class="max-w-7xl mx-auto px-6">
-<div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
 <div class="max-w-2xl">
 <h2 class="text-primary font-bold tracking-widest text-xs uppercase mb-6">Qué Hacemos</h2>
-<h3 class="serif-heading text-[clamp(2rem,6vw,3.75rem)]">Servicios de precisión sónica.</h3>
+<h3 class="serif-heading text-[clamp(2rem,6vw,3.75rem)]">Soluciones sonoras para crecer con claridad.</h3>
 </div>
 <p class="text-sm text-subtle max-w-xs font-light leading-relaxed">
-                        La identidad sonora tiene vocación integral: música, diseño sonoro para señales y alertas, y la voz como activo de marca en todos los canales.
+                        Convertimos el sonido en una ventaja competitiva medible en atención, recuerdo y preferencia.
                     </p>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-primary/30">
@@ -284,137 +351,106 @@ Las marcas que articulan una identidad sonora coherente generan más <span class
 </div>
 </div>
 </section>
-<!-- Diferencial -->
-<section class="py-20 sm:py-24 md:py-32 px-6">
-<div class="max-w-4xl mx-auto text-center border border-white/10 p-16 rounded-xl bg-surface-soft">
-<blockquote class="mb-10">
-<p class="text-2xl sm:text-3xl md:text-5xl serif-heading italic font-light leading-relaxed">"No improvisamos: diseñamos sonido con <span class="text-primary">intención</span>."</p>
-</blockquote>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<div class="flex flex-col items-center">
-<span class="material-symbols-outlined text-primary mb-4">biotech</span>
-<p class="text-xs uppercase tracking-widest font-bold">Arquitectura de Audio</p>
-</div>
-<div class="flex flex-col items-center">
-<span class="material-symbols-outlined text-primary mb-4">psychology</span>
-<p class="text-xs uppercase tracking-widest font-bold">Psicología Auditiva</p>
-</div>
-<div class="flex flex-col items-center">
-<span class="material-symbols-outlined text-primary mb-4">verified</span>
-<p class="text-xs uppercase tracking-widest font-bold">Fidelidad Absoluta</p>
-</div>
-</div>
-</div>
-</section>
 <!-- Proceso editorial de creación -->
-<section class="py-20 sm:py-24 md:py-32 overflow-hidden" id="como-trabajamos">
+<section class="process-showcase py-14 sm:py-16 md:py-20 overflow-hidden" id="como-trabajamos">
 <div class="max-w-7xl mx-auto px-6">
-<div class="text-center mb-16 md:mb-24">
-<h2 class="text-primary font-bold tracking-widest text-xs uppercase">Proceso editorial de creación</h2>
-<div class="w-16 h-px bg-primary mx-auto mt-3"></div>
+<div class="process-shell">
+<div class="process-head">
+<div>
+<p class="text-primary font-bold tracking-[0.2em] text-[0.66rem] uppercase mb-3">Nuestro método</p>
+<h2 class="serif-heading process-title">Proceso editorial <span class="text-primary">de creación</span></h2>
 </div>
-<div class="space-y-20 md:space-y-28">
-<!-- Paso 1: Escuchamos | descripción -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
-<div class="relative flex flex-col">
-<div class="relative min-h-[4rem]">
-<span class="absolute -left-2 top-0 text-[6rem] sm:text-[8rem] md:text-[9rem] font-light text-white/[0.06] select-none pointer-events-none leading-none" aria-hidden="true">01</span>
-<h3 class="serif-heading text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--n-ink-100)] relative z-10">Escuchamos.</h3>
+<p class="process-intro text-subtle">Tres fases para alinear estrategia, creación refinada y entrega lista para usar.</p>
 </div>
-<div class="w-12 h-px bg-primary mt-4"></div>
-</div>
-<div class="flex flex-col md:pl-4">
-<p class="text-sm sm:text-base text-subtle leading-relaxed">Inmersión profunda en la marca, sus competidores y sus objetivos estratégicos a largo plazo.</p>
-<div class="w-12 h-px bg-primary mt-6"></div>
-</div>
-</div>
-<!-- Paso 2: descripción | Definimos -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
-<div class="flex flex-col order-2 md:order-1">
-<p class="text-sm sm:text-base text-subtle leading-relaxed">Establecemos el ADN sónico y las directrices estratégicas que guiarán toda la arquitectura auditiva.</p>
-<div class="w-12 h-px bg-primary mt-6"></div>
-</div>
-<div class="relative flex flex-col order-1 md:order-2 md:pl-4">
-<div class="relative min-h-[4rem]">
-<span class="absolute -left-2 top-0 text-[6rem] sm:text-[8rem] md:text-[9rem] font-light text-white/[0.06] select-none pointer-events-none leading-none" aria-hidden="true">02</span>
-<h3 class="serif-heading text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--n-ink-100)] relative z-10">Definimos.</h3>
-</div>
-<div class="w-12 h-px bg-primary mt-4"></div>
-</div>
-</div>
-<!-- Paso 3: Creamos | descripción -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
-<div class="relative flex flex-col">
-<div class="relative min-h-[4rem]">
-<span class="absolute -left-2 top-0 text-[6rem] sm:text-[8rem] md:text-[9rem] font-light text-white/[0.06] select-none pointer-events-none leading-none" aria-hidden="true">03</span>
-<h3 class="serif-heading text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--n-ink-100)] relative z-10">Creamos.</h3>
-</div>
-<div class="w-12 h-px bg-primary mt-4"></div>
-</div>
-<div class="flex flex-col md:pl-4">
-<p class="text-sm sm:text-base text-subtle leading-relaxed">Composición y diseño de propuestas creativas originales, alejadas de clichés y librerías genéricas.</p>
-<div class="w-12 h-px bg-primary mt-6"></div>
-</div>
-</div>
-<!-- Paso 4: descripción | Refinamos -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
-<div class="flex flex-col order-2 md:order-1">
-<p class="text-sm sm:text-base text-subtle leading-relaxed">Ajustes técnicos de alta precisión y pruebas de aplicación en diversos entornos y medios digitales.</p>
-<div class="w-12 h-px bg-primary mt-6"></div>
-</div>
-<div class="relative flex flex-col order-1 md:order-2 md:pl-4">
-<div class="relative min-h-[4rem]">
-<span class="absolute -left-2 top-0 text-[6rem] sm:text-[8rem] md:text-[9rem] font-light text-white/[0.06] select-none pointer-events-none leading-none" aria-hidden="true">04</span>
-<h3 class="serif-heading text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--n-ink-100)] relative z-10">Refinamos.</h3>
-</div>
-<div class="w-12 h-px bg-primary mt-4"></div>
-</div>
-</div>
-<!-- Paso 5: Entregamos | descripción -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
-<div class="relative flex flex-col">
-<div class="relative min-h-[4rem]">
-<span class="absolute -left-2 top-0 text-[6rem] sm:text-[8rem] md:text-[9rem] font-light text-white/[0.06] select-none pointer-events-none leading-none" aria-hidden="true">05</span>
-<h3 class="serif-heading text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--n-ink-100)] relative z-10">Entregamos.</h3>
-</div>
-<div class="w-12 h-px bg-primary mt-4"></div>
-</div>
-<div class="flex flex-col md:pl-4">
-<p class="text-sm sm:text-base text-subtle leading-relaxed">Manual de uso sónico integral y activos finales masterizados con estándares de fidelidad absoluta.</p>
-<div class="w-12 h-px bg-primary mt-6"></div>
-</div>
+<div class="process-cards-wrap">
+<div class="process-line" aria-hidden="true"></div>
+<div class="process-cards-grid">
+<article class="process-card">
+<span class="process-card__index">01</span>
+<span class="process-card__icon material-symbols-outlined">hearing</span>
+<h3 class="serif-heading process-card__title">Escuchamos y definimos.</h3>
+<span class="process-card__accent"></span>
+<p class="process-card__desc">Inmersión en la marca, audiencias y competencia. Fijamos ADN sónico y criterios estratégicos.</p>
+</article>
+<article class="process-card">
+<span class="process-card__index">02</span>
+<span class="process-card__icon material-symbols-outlined">graphic_eq</span>
+<h3 class="serif-heading process-card__title">Creamos y refinamos.</h3>
+<span class="process-card__accent"></span>
+<p class="process-card__desc">Propuestas compositivas originales e iteración técnica en distintos puntos de contacto.</p>
+</article>
+<article class="process-card">
+<span class="process-card__index">03</span>
+<span class="process-card__icon material-symbols-outlined">target</span>
+<h3 class="serif-heading process-card__title">Entregamos.</h3>
+<span class="process-card__accent"></span>
+<p class="process-card__desc">Manual de uso, activos masterizados y criterios para implementar sin perder coherencia.</p>
+</article>
 </div>
 </div>
 </div>
 </div>
 </section>
 <!-- A quiénes trabajamos -->
-<section class="py-32 bg-surface-muted" id="clientes">
-<div class="max-w-7xl mx-auto px-6">
-<h2 class="text-primary font-bold tracking-widest text-xs uppercase mb-10 sm:mb-16 text-center">A quiénes trabajamos</h2>
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-dim">
-<div class="border-l border-white/10 pl-6 py-4 hover:opacity-100 transition-opacity">
-<span class="text-xs uppercase font-bold tracking-[0.2em]">Agencias de Publicidad</span>
-</div>
-<div class="border-l border-white/10 pl-6 py-4 hover:opacity-100 transition-opacity">
-<span class="text-xs uppercase font-bold tracking-[0.2em]">Productoras de Cine</span>
-</div>
-<div class="border-l border-white/10 pl-6 py-4 hover:opacity-100 transition-opacity">
-<span class="text-xs uppercase font-bold tracking-[0.2em]">Marcas Luxury</span>
-</div>
-<div class="border-l border-white/10 pl-6 py-4 hover:opacity-100 transition-opacity">
-<span class="text-xs uppercase font-bold tracking-[0.2em]">Startups Tech</span>
-</div>
+<section class="clients-showcase py-10 sm:py-12 md:py-14 border-t border-white/5" id="clientes">
+<div class="max-w-3xl mx-auto px-6 text-center">
+<p class="text-primary font-bold tracking-[0.2em] text-[0.66rem] uppercase mb-3">A quiénes trabajamos</p>
+<p class="text-subtle text-sm sm:text-[0.95rem] leading-relaxed font-light">Equipos de publicidad, productoras, marcas premium y startups que buscan coherencia sonora y diferenciación medible.</p>
+<div class="mt-6 flex flex-wrap justify-center gap-2.5">
+<span class="rounded-full border border-white/12 bg-white/[0.03] px-3.5 py-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-subtle">Publicidad</span>
+<span class="rounded-full border border-white/12 bg-white/[0.03] px-3.5 py-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-subtle">Cine</span>
+<span class="rounded-full border border-white/12 bg-white/[0.03] px-3.5 py-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-subtle">Luxury</span>
+<span class="rounded-full border border-white/12 bg-white/[0.03] px-3.5 py-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-subtle">Tech</span>
 </div>
 </div>
 </section>
+<!-- Selección curada -->
+<section class="curated-songs py-12 sm:py-14 md:py-16 px-6 bg-surface-darker/35" id="canciones">
+<div class="max-w-7xl mx-auto">
+<div class="curated-songs__head">
+<p class="text-primary font-bold tracking-[0.2em] text-[0.66rem] uppercase">Selección curada</p>
+<p class="text-subtle text-sm">Pago y coordinación por WhatsApp</p>
+</div>
+<div class="curated-songs__grid">
+<article class="song-card">
+<span class="song-card__genre">Bambuco</span>
+<h3 class="serif-heading song-card__title">Muy tarde</h3>
+<p class="song-card__artist">Ancízar Castrillón Santa</p>
+<p class="song-card__from">Desde</p>
+<p class="song-card__price">$35.000 <span>COP</span></p>
+<a href="https://wa.me/3046196073?text=Hola%2C%20quiero%20comprar%20la%20canci%C3%B3n%20Muy%20tarde%20de%20Anc%C3%ADzar%20Castrill%C3%B3n%20Santa." target="_blank" rel="noopener noreferrer" aria-label="Comprar canción Muy tarde por WhatsApp" class="song-card__cta">Comprar canción</a>
+</article>
+<article class="song-card">
+<span class="song-card__genre">Caña</span>
+<h3 class="serif-heading song-card__title">SOY</h3>
+<p class="song-card__artist">Ancízar Castrillón y Fernando Salazar</p>
+<p class="song-card__from">Desde</p>
+<p class="song-card__price">$38.000 <span>COP</span></p>
+<a href="https://wa.me/3046196073?text=Hola%2C%20quiero%20comprar%20la%20canci%C3%B3n%20SOY%20de%20Anc%C3%ADzar%20Castrill%C3%B3n%20y%20Fernando%20Salazar." target="_blank" rel="noopener noreferrer" aria-label="Comprar canción SOY por WhatsApp" class="song-card__cta">Comprar canción</a>
+</article>
+<article class="song-card">
+<span class="song-card__genre">Bambuco</span>
+<h3 class="serif-heading song-card__title">A cambio</h3>
+<p class="song-card__artist">Ancízar Castrillón y Fernando Salazar</p>
+<p class="song-card__from">Desde</p>
+<p class="song-card__price">$36.000 <span>COP</span></p>
+<a href="https://wa.me/3046196073?text=Hola%2C%20quiero%20comprar%20la%20canci%C3%B3n%20A%20cambio%20de%20Anc%C3%ADzar%20Castrill%C3%B3n%20y%20Fernando%20Salazar." target="_blank" rel="noopener noreferrer" aria-label="Comprar canción A cambio por WhatsApp" class="song-card__cta">Comprar canción</a>
+</article>
+</div>
+<p class="mt-10 text-center">
+<a href="https://wa.me/3046196073?text=Hola%2C%20quiero%20consultar%20m%C3%A1s%20t%C3%ADtulos%20y%20asesor%C3%ADa%20sobre%20canciones%20disponibles." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.12em] text-primary hover:text-white transition-colors">Consultar más títulos y asesoría<span class="material-symbols-outlined text-[15px]" aria-hidden="true">chat</span></a>
+</p>
+</div>
+</section>
 <!-- Compromiso & Final CTA -->
-<section class="relative py-40 px-6 overflow-hidden">
+<section class="relative py-20 sm:py-24 md:py-28 px-6 overflow-hidden">
 <div class="absolute inset-0 bg-primary/5"></div>
 <div class="max-w-4xl mx-auto text-center relative z-10">
-<h2 class="serif-heading text-4xl md:text-6xl mb-12 italic">Eleve la dimensión sensorial de su marca hoy mismo.</h2>
-<p class="text-lg text-subtle mb-16 max-w-2xl mx-auto font-light">
-                    Un código sonoro propio, declinado en cada canal con rigor. Confianza, consenso y un sistema que perdura más allá de una sola pieza musical.
+<h2 id="closing-typewriter-heading" class="serif-heading text-4xl md:text-5xl mb-8 italic leading-tight min-h-[2.8em] sm:min-h-[2.2em]" aria-label="No es audio. Es percepción que activa decisiones.">
+<span class="closing-typewriter__target" aria-hidden="true"></span>
+</h2>
+<p class="text-base sm:text-lg text-subtle mb-12 max-w-2xl mx-auto font-light">
+                    Diseñamos un sistema sonoro propio para que tu marca sea reconocida en segundos y recordada por años.
                 </p>
 <div class="inline-block p-1 bg-white/5 rounded-lg">
 <a href="https://wa.me/3046196073?text=Hola%2C%20quiero%20mi%20branding%20sonoro" target="_blank" rel="noopener noreferrer" aria-label="Iniciar proyecto por WhatsApp" class="inline-block bg-primary hover:bg-primary-dark hover:shadow-[0_0_24px_rgba(161,18,23,0.45)] text-white px-12 py-6 rounded font-bold tracking-[0.2em] uppercase transition-all duration-300 shadow-lg text-center">
@@ -424,28 +460,31 @@ Las marcas que articulan una identidad sonora coherente generan más <span class
 </div>
 </section>
 </main>
-<footer class="py-20 border-t border-white/5 bg-background-dark">
+<footer class="footer-premium py-14 sm:py-16 border-t border-white/5 bg-background-dark">
 <div class="max-w-7xl mx-auto px-6">
-<div class="divider-red mb-12"></div>
-<div class="flex flex-col md:flex-row justify-between items-center gap-12">
-<div class="flex items-center gap-3">
+<div class="divider-red mb-8"></div>
+<div class="footer-premium__row">
+<div class="footer-premium__brand">
 <img
   alt="NIEBLA SOUND-BRANDING"
-  class="h-20 w-auto"
+  class="h-14 sm:h-16 w-auto opacity-95"
   src="./assets/img/NIEBLA%20SOUND-BRANDING.png?v=2"
   onerror="this.src='./assets/img/NIEBLA.png'"
   width="212"
   height="80"
   decoding="async"/>
 </div>
-<div class="view-counter border-l border-white/10 pl-8 py-3 flex flex-col gap-0.5">
-<span class="text-xs uppercase tracking-[0.2em] text-dim font-bold">Vistas</span>
-<span id="view-count" class="text-3xl font-bold text-primary tabular-nums" aria-live="polite">—</span>
+<div class="view-counter footer-premium__counter" role="status" aria-label="Contador de vistas del sitio">
+<div class="view-counter__inner">
+<span class="view-counter__label text-xs uppercase tracking-[0.18em] text-dim font-bold">Vistas</span>
+<span class="view-counter__rule" aria-hidden="true"></span>
+<span id="view-count" class="view-counter__value text-xl sm:text-2xl font-bold text-primary tabular-nums" aria-live="polite">—</span>
 </div>
-<div class="text-[10px] uppercase tracking-widest text-dim font-bold">
+</div>
+<div class="footer-premium__copyright text-[10px] uppercase tracking-widest text-dim font-bold">
                     © 2026 Niebla Sonic Agency. Todos los derechos reservados.
                 </div>
-<div class="flex gap-8 text-subtle">
+<div class="footer-premium__social flex gap-6 sm:gap-8 text-subtle">
 <a class="hover:text-primary transition-colors text-xs font-bold tracking-widest" href="https://www.instagram.com/" aria-label="Niebla en Instagram">INSTAGRAM</a>
 <a class="hover:text-primary transition-colors text-xs font-bold tracking-widest" href="https://www.linkedin.com/" aria-label="Niebla en LinkedIn">LINKEDIN</a>
 <a class="hover:text-primary transition-colors text-xs font-bold tracking-widest" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Niebla en Facebook">FACEBOOK</a>
