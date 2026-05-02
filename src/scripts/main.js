@@ -1,4 +1,492 @@
+/** URL pública de “Programación de citas” (Google Calendar, p. ej. https://calendar.app.google/…). Si está vacío, se usa WhatsApp. */
+const GOOGLE_BOOKING_URL = "";
+
+/** Festivos en Colombia (`YYYY-MM-DD` local). Ampliá el objeto por año nuevo. */
+const SCHEDULE_CO_HOLIDAYS = {
+  2026: new Set([
+    "2026-01-01",
+    "2026-01-12",
+    "2026-03-23",
+    "2026-04-02",
+    "2026-04-03",
+    "2026-05-01",
+    "2026-05-18",
+    "2026-06-08",
+    "2026-06-15",
+    "2026-06-29",
+    "2026-08-07",
+    "2026-08-17",
+    "2026-10-12",
+    "2026-11-02",
+    "2026-11-16",
+    "2026-12-08",
+    "2026-12-25",
+  ]),
+  2027: new Set([
+    "2027-01-01",
+    "2027-01-11",
+    "2027-03-22",
+    "2027-03-25",
+    "2027-03-26",
+    "2027-05-01",
+    "2027-05-10",
+    "2027-05-31",
+    "2027-06-07",
+    "2027-07-05",
+    "2027-07-20",
+    "2027-08-07",
+    "2027-08-16",
+    "2027-10-18",
+    "2027-11-01",
+    "2027-11-15",
+    "2027-12-08",
+    "2027-12-25",
+  ]),
+};
+
 document.addEventListener("DOMContentLoaded", () => {
+  const openExternalBooking = () => {
+    const url = typeof GOOGLE_BOOKING_URL === "string" ? GOOGLE_BOOKING_URL.trim() : "";
+    if (url) {
+      window.open(url, "_blank", "noopener,noreferrer");
+      return;
+    }
+    window.open(
+      `https://wa.me/3046196073?text=${encodeURIComponent(
+        "Hola, quiero agendar una asesoría de branding sonoro."
+      )}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
+  const scheduleGrid = document.getElementById("schedule-calendar-grid");
+  const monthLabel = document.getElementById("schedule-month-label");
+  const prevBtn = document.getElementById("schedule-prev-month");
+  const nextBtn = document.getElementById("schedule-next-month");
+  const tzEl = document.getElementById("schedule-timezone-label");
+  const primaryBookingBtn = document.getElementById("schedule-open-booking");
+  const pickerCols = document.getElementById("schedule-picker-cols");
+  const timesPanel = document.getElementById("schedule-times-panel");
+  const timesDateLabel = document.getElementById("schedule-times-date-label");
+  const timesSlots = document.getElementById("schedule-times-slots");
+  const continueBtn = document.getElementById("schedule-continue-btn");
+  const mainPicker = document.getElementById("schedule-main-picker");
+  const mainDetails = document.getElementById("schedule-main-details");
+  const sidebarBack = document.getElementById("schedule-sidebar-back");
+  const choiceSummary = document.getElementById("schedule-choice-summary");
+  const summarySlotLine = document.getElementById("schedule-summary-slot-line");
+  const summaryTzLine = document.getElementById("schedule-summary-tz-line");
+  const detailsForm = document.getElementById("schedule-details-form");
+  const scheduleNameInput = document.getElementById("schedule-detail-name");
+  const scheduleEmailInput = document.getElementById("schedule-detail-email");
+  const scheduleNameError = document.getElementById("schedule-error-name");
+  const scheduleEmailError = document.getElementById("schedule-error-email");
+
+  if (
+    scheduleGrid &&
+    monthLabel &&
+    prevBtn &&
+    nextBtn &&
+    continueBtn &&
+    mainPicker &&
+    mainDetails &&
+    sidebarBack &&
+    choiceSummary &&
+    summarySlotLine &&
+    summaryTzLine &&
+    detailsForm &&
+    scheduleNameInput &&
+    scheduleEmailInput &&
+    scheduleNameError &&
+    scheduleEmailError
+  ) {
+    const EMPTY_MSG = "No puede quedar vacío.";
+
+    const showSchError = (
+      /** @type {HTMLInputElement} */ input,
+      /** @type {HTMLElement} */ errEl,
+      msg
+    ) => {
+      input.classList.add("schedule-field__input--invalid");
+      input.setAttribute("aria-invalid", "true");
+      errEl.textContent = msg;
+      errEl.hidden = false;
+    };
+
+    const hideSchError = (
+      /** @type {HTMLInputElement} */ input,
+      /** @type {HTMLElement} */ errEl
+    ) => {
+      input.classList.remove("schedule-field__input--invalid");
+      input.removeAttribute("aria-invalid");
+      errEl.hidden = true;
+    };
+
+    const clearScheduleErrors = () => {
+      hideSchError(scheduleNameInput, scheduleNameError);
+      hideSchError(scheduleEmailInput, scheduleEmailError);
+    };
+
+    scheduleNameInput.addEventListener("input", () => {
+      if (scheduleNameInput.value.trim())
+        hideSchError(scheduleNameInput, scheduleNameError);
+    });
+    scheduleEmailInput.addEventListener("input", () => {
+      if (
+        scheduleEmailInput.value.trim() &&
+        scheduleEmailInput.validity.valid
+      ) {
+        hideSchError(scheduleEmailInput, scheduleEmailError);
+      }
+    });
+
+    const view = new Date();
+    view.setDate(1);
+
+    const startOfMonth = (d) => new Date(d.getFullYear(), d.getMonth(), 1);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const earliestBookable = new Date(today);
+    earliestBookable.setDate(earliestBookable.getDate() + 1);
+
+    const scheduleCoDateKey = (d) =>
+      `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+
+    const scheduleIsColombianHoliday = (d) => {
+      const yearSet = SCHEDULE_CO_HOLIDAYS[d.getFullYear()];
+      return Boolean(yearSet && yearSet.has(scheduleCoDateKey(d)));
+    };
+
+    /** @param {Date} dateAtMidnight */
+    const scheduleIsBookable = (dateAtMidnight) => {
+      const t = dateAtMidnight.getTime();
+      if (t < earliestBookable.getTime()) return false;
+      if (dateAtMidnight.getDay() === 0) return false;
+      if (scheduleIsColombianHoliday(dateAtMidnight)) return false;
+      return true;
+    };
+
+    const maxView = new Date();
+    maxView.setMonth(maxView.getMonth() + 12);
+
+    let selectedDayButton = null;
+    let selectedCellDate = null;
+    let selectedDateLabelShort = "";
+    let selectedDateLabelLong = "";
+    let selectedTimeSlot = null;
+    let selectedSlotEl = null;
+    let timezoneDisplayText = "—";
+
+    const capFirst = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : "");
+
+    const endAfterOneHour = (hhmm) => {
+      const [h, mi] = hhmm.split(":").map((n) => parseInt(n, 10));
+      const endH = (h + 1) % 24;
+      return `${String(endH).padStart(2, "0")}:${String(mi).padStart(2, "0")}`;
+    };
+
+    const slotsForDate = (d) => {
+      const w = d.getDay();
+      const weekend = w === 0 || w === 6;
+      const startH = weekend ? 10 : 9;
+      const endEx = weekend ? 14 : 18;
+      const slots = [];
+      for (let h = startH; h < endEx; h++) {
+        const hh = `${String(h).padStart(2, "0")}`;
+        slots.push(`${hh}:00`, `${hh}:30`);
+      }
+      return slots;
+    };
+
+    const hideDetailsStep = () => {
+      mainPicker.hidden = false;
+      mainDetails.hidden = true;
+      sidebarBack.hidden = true;
+      choiceSummary.hidden = true;
+      clearScheduleErrors();
+    };
+
+    const clearSlotPick = () => {
+      selectedTimeSlot = null;
+      if (selectedSlotEl) {
+        selectedSlotEl.classList.remove("schedule-times__slot--selected");
+        selectedSlotEl = null;
+      }
+      continueBtn.hidden = true;
+    };
+
+    const clearDaySelection = () => {
+      if (selectedDayButton) {
+        selectedDayButton.classList.remove("schedule-cal__day--selected");
+        selectedDayButton = null;
+      }
+      selectedCellDate = null;
+      selectedDateLabelShort = "";
+      selectedDateLabelLong = "";
+      clearSlotPick();
+      hideDetailsStep();
+      if (timesPanel) timesPanel.hidden = true;
+      if (timesSlots) timesSlots.replaceChildren();
+      if (timesDateLabel) timesDateLabel.textContent = "";
+      pickerCols?.classList.remove("schedule-picker__cols--has-times");
+      detailsForm.reset();
+      clearScheduleErrors();
+    };
+
+    const showTimesForDate = (cellDate, dayBtn) => {
+      if (!scheduleIsBookable(cellDate)) return;
+      hideDetailsStep();
+      if (selectedDayButton && selectedDayButton !== dayBtn) {
+        selectedDayButton.classList.remove("schedule-cal__day--selected");
+      }
+      selectedDayButton = dayBtn;
+      dayBtn.classList.add("schedule-cal__day--selected");
+      selectedCellDate = cellDate;
+
+      selectedDateLabelShort = capFirst(
+        new Intl.DateTimeFormat("es", {
+          weekday: "long",
+          month: "long",
+          day: "numeric",
+        }).format(cellDate)
+      );
+
+      selectedDateLabelLong = capFirst(
+        new Intl.DateTimeFormat("es", {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        }).format(cellDate)
+      );
+
+      clearSlotPick();
+      if (timesDateLabel) timesDateLabel.textContent = selectedDateLabelShort;
+
+      if (timesSlots) {
+        timesSlots.replaceChildren();
+        slotsForDate(cellDate).forEach((time) => {
+          const slotBtn = document.createElement("button");
+          slotBtn.type = "button";
+          slotBtn.className = "schedule-times__slot";
+          slotBtn.textContent = time;
+          slotBtn.setAttribute(
+            "aria-label",
+            `Seleccionar ${selectedDateLabelShort} a las ${time}`
+          );
+          slotBtn.addEventListener("click", () => {
+            if (selectedSlotEl && selectedSlotEl !== slotBtn) {
+              selectedSlotEl.classList.remove("schedule-times__slot--selected");
+            }
+            selectedSlotEl = slotBtn;
+            selectedTimeSlot = time;
+            slotBtn.classList.add("schedule-times__slot--selected");
+            continueBtn.hidden = false;
+          });
+          timesSlots.appendChild(slotBtn);
+        });
+      }
+      if (timesPanel) timesPanel.hidden = false;
+      pickerCols?.classList.add("schedule-picker__cols--has-times");
+    };
+
+    const showDetailsStep = () => {
+      if (!(selectedCellDate && selectedTimeSlot)) return;
+
+      const endT = endAfterOneHour(selectedTimeSlot);
+      summarySlotLine.textContent =
+        `${selectedTimeSlot} – ${endT}, ${selectedDateLabelLong}`;
+      summaryTzLine.textContent = timezoneDisplayText;
+
+      mainPicker.hidden = true;
+      mainDetails.hidden = false;
+      sidebarBack.hidden = false;
+      choiceSummary.hidden = false;
+      clearScheduleErrors();
+      const titled = mainDetails.querySelector(".schedule-details__title");
+      if (titled instanceof HTMLElement) titled.focus();
+    };
+
+    continueBtn.addEventListener("click", () => showDetailsStep());
+
+    sidebarBack.addEventListener("click", () => hideDetailsStep());
+
+    detailsForm.addEventListener("submit", (ev) => {
+      ev.preventDefault();
+      clearScheduleErrors();
+
+      if (!(selectedCellDate && selectedTimeSlot && selectedDateLabelLong)) return;
+
+      const nombre = scheduleNameInput.value.trim();
+      const correo = scheduleEmailInput.value.trim();
+      const notasEl = detailsForm.elements.namedItem("notas");
+      const notas =
+        notasEl instanceof HTMLTextAreaElement ? notasEl.value.trim() : "";
+
+      let invalid = false;
+      if (!nombre) {
+        showSchError(scheduleNameInput, scheduleNameError, EMPTY_MSG);
+        invalid = true;
+      }
+      if (!correo) {
+        showSchError(scheduleEmailInput, scheduleEmailError, EMPTY_MSG);
+        invalid = true;
+      } else if (!scheduleEmailInput.checkValidity()) {
+        showSchError(
+          scheduleEmailInput,
+          scheduleEmailError,
+          "Introducí un correo válido."
+        );
+        invalid = true;
+      }
+      if (invalid) {
+        if (!nombre) scheduleNameInput.focus();
+        else scheduleEmailInput.focus();
+        return;
+      }
+
+      const endT = endAfterOneHour(selectedTimeSlot);
+      const bookingUrl =
+        typeof GOOGLE_BOOKING_URL === "string" ? GOOGLE_BOOKING_URL.trim() : "";
+
+      const bodyLines = [
+        "Solicitud de cita — Sesión NIEBLA",
+        "",
+        `Nombre: ${nombre}`,
+        `Correo: ${correo}`,
+        "",
+        `Cuándo: ${selectedDateLabelLong}`,
+        `Duración solicitada: ${selectedTimeSlot} – ${endT} (1 hora)`,
+        `Zona horaria referida: ${timezoneDisplayText}`,
+        "",
+        "Notas del invitado:",
+        notas || "(sin notas)",
+        "",
+        "---",
+        "Este mensaje se generó desde el formulario de reservas en nieblasoundbranding.com.",
+        "El cliente queda en copia (CC) con el mismo contenido.",
+        "",
+      ];
+      const body = bodyLines.join("\r\n");
+      const subject = `Cita NIEBLA — ${selectedDateLabelShort} ${selectedTimeSlot}`;
+
+      if (bookingUrl)
+        window.open(bookingUrl, "_blank", "noopener,noreferrer");
+
+      const cc = encodeURIComponent(correo);
+      const mailQuery = [
+        `subject=${encodeURIComponent(subject)}`,
+        `body=${encodeURIComponent(body)}`,
+        `cc=${cc}`,
+      ].join("&");
+
+      globalThis.location.href = `mailto:Diegoarizamedina@gmail.com?${mailQuery}`;
+    });
+
+    const canGoPrev = () => startOfMonth(view) > startOfMonth(today);
+    const canGoNext = () => startOfMonth(view) < startOfMonth(maxView);
+
+    const updateNavButtons = () => {
+      prevBtn.disabled = !canGoPrev();
+      nextBtn.disabled = !canGoNext();
+    };
+
+    const renderCalendar = () => {
+      clearDaySelection();
+
+      const y = view.getFullYear();
+      const m = view.getMonth();
+      const formatted = new Intl.DateTimeFormat("es", {
+        month: "long",
+        year: "numeric",
+      }).format(new Date(y, m, 1));
+      monthLabel.textContent =
+        formatted.charAt(0).toUpperCase() + formatted.slice(1);
+
+      scheduleGrid.replaceChildren();
+      const firstDow = new Date(y, m, 1).getDay();
+      const dim = new Date(y, m + 1, 0).getDate();
+
+      for (let i = 0; i < firstDow; i++) {
+        const pad = document.createElement("div");
+        pad.className = "schedule-cal__pad";
+        pad.setAttribute("aria-hidden", "true");
+        scheduleGrid.appendChild(pad);
+      }
+
+      for (let d = 1; d <= dim; d++) {
+        const cellDate = new Date(y, m, d);
+        cellDate.setHours(0, 0, 0, 0);
+
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "schedule-cal__day";
+        btn.textContent = String(d);
+
+        const verbose = new Intl.DateTimeFormat("es", {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+        }).format(cellDate);
+
+        if (!scheduleIsBookable(cellDate)) {
+          btn.classList.add("schedule-cal__day--muted");
+          btn.disabled = true;
+          const tooSoon = cellDate.getTime() < earliestBookable.getTime();
+          const sun = cellDate.getDay() === 0;
+          const hol = scheduleIsColombianHoliday(cellDate);
+          let reason = "No disponible";
+          if (tooSoon && !sun && !hol) reason = `Reservá desde mañana al menos — ${verbose}`;
+          else if (sun) reason = `Domingo — sin citas — ${verbose}`;
+          else if (hol) reason = `Festivo en Colombia — sin citas — ${verbose}`;
+          btn.setAttribute("aria-label", reason);
+        } else {
+          btn.classList.add("schedule-cal__day--available");
+          btn.setAttribute("aria-label", `Ver horarios — ${verbose}`);
+          btn.addEventListener("click", () =>
+            showTimesForDate(cellDate, btn));
+        }
+
+        scheduleGrid.appendChild(btn);
+      }
+
+      updateNavButtons();
+    };
+
+    prevBtn.addEventListener("click", () => {
+      view.setMonth(view.getMonth() - 1);
+      renderCalendar();
+    });
+    nextBtn.addEventListener("click", () => {
+      view.setMonth(view.getMonth() + 1);
+      renderCalendar();
+    });
+
+    if (tzEl) {
+      try {
+        const zone =
+          Intl.DateTimeFormat().resolvedOptions().timeZone || "America/Bogota";
+        const friendly = zone.replace(/_/g, " ");
+        const clock = new Intl.DateTimeFormat("es", {
+          timeZone: zone,
+          hour: "2-digit",
+          minute: "2-digit",
+        }).format(new Date());
+        timezoneDisplayText = `${friendly} (${clock})`;
+        tzEl.textContent = timezoneDisplayText;
+      } catch (_e) {
+        timezoneDisplayText = "América/Bogotá (GMT−5)";
+        tzEl.textContent = timezoneDisplayText;
+      }
+    }
+
+    primaryBookingBtn?.addEventListener("click", openExternalBooking);
+
+    renderCalendar();
+  }
+
   const viewCountEl = document.getElementById("view-count");
   if (viewCountEl) {
     const hitUrl = "https://api.countapi.xyz/hit/niebla/soundbranding";
@@ -238,14 +726,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const heroAudioEnableBtn = document.getElementById("hero-audio-enable");
   const heroAudioAmbientePolicy = document.getElementById("hero-audio-ambiente-policy");
   const heroAudioLiveIndicator = document.getElementById("hero-audio-live-indicator");
-  const HERO_AUDIO_POLICY_IDLE =
-    "Para que el analizador reaccione al sonido real de tu entorno (voz, música, ruido de la sala), el navegador necesita permiso de micrófono. Solo puede pedírtelo de forma segura tras un gesto tuyo en esta página: es una política de seguridad del propio navegador, no del sitio. El audio se analiza solo en tu dispositivo para animar estas ondas; no se graba ni se envía a ningún servidor.";
+  const HERO_AUDIO_POLICY_IDLE = "";
   const HERO_AUDIO_POLICY_LIVE =
     "Escuchando el ambiente solo en este dispositivo para animar el analizador. El audio no se graba ni se transmite.";
   const HERO_AUDIO_POLICY_DENIED =
     "No se pudo acceder al micrófono. Revisa el permiso del sitio en la barra del navegador o pulsa Reintentar.";
-  const HERO_AUDIO_POLICY_UNSUPPORTED =
-    "Tu navegador no ofrece acceso al micrófono para esta visualización (por ejemplo HTTP inseguro o API no disponible). Las ondas se muestran en modo decorativo.";
   const heroAudioRadialBars = document.getElementById("hero-audio-radial-bars");
   const heroAudioRingMain = document.getElementById("hero-audio-ring-main");
   const heroAudioRingSecondary = document.getElementById("hero-audio-ring-secondary");
@@ -335,7 +820,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (heroAudioAmbientePolicy) {
       if (nextState === "fallback-static") {
-        heroAudioAmbientePolicy.textContent = supportsAudio ? HERO_AUDIO_POLICY_DENIED : HERO_AUDIO_POLICY_UNSUPPORTED;
+        heroAudioAmbientePolicy.textContent = supportsAudio ? HERO_AUDIO_POLICY_DENIED : "";
       } else if (nextState === "idle") heroAudioAmbientePolicy.textContent = HERO_AUDIO_POLICY_IDLE;
       else if (nextState === "live") heroAudioAmbientePolicy.textContent = HERO_AUDIO_POLICY_LIVE;
     }

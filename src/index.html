@@ -104,14 +104,17 @@
 <header class="site-header fixed top-0 w-full z-40 border-b border-white/5 bg-background-dark/80 backdrop-blur-md">
 <div class="site-header__shell max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 <div class="site-header__left flex items-center gap-3">
+<a class="site-header__brand" href="./" aria-label="NIEBLA — Ir al inicio">
 <img
-  alt="NIEBLA SOUND-BRANDING"
-  class="h-20 w-auto"
+  alt="NIEBLA SOUND BRANDING"
+  class="brand-mark-logo brand-mark-logo--header"
   src="./assets/img/NIEBLA%20SOUND-BRANDING.png?v=2"
   onerror="this.src='./assets/img/NIEBLA.png'"
   width="212"
   height="80"
-  decoding="async"/>
+  decoding="async"
+  fetchpriority="high"/>
+</a>
 <a href="https://wa.me/3046196073?text=Hola%2C%20quiero%20iniciar%20mi%20proyecto%20de%20branding%20sonoro." target="_blank" rel="noopener noreferrer" aria-label="Iniciar proyecto por WhatsApp" class="inline-block bg-primary hover:bg-primary-dark hover:shadow-[0_0_20px_rgba(161,18,23,0.35)] text-white px-5 py-2.5 rounded text-[10px] font-bold tracking-[0.14em] uppercase transition-all duration-300 text-center">
                 Iniciar proyecto
             </a>
@@ -129,6 +132,7 @@
 <a class="site-header__link hover:text-primary transition-colors" href="#que-hacemos" aria-label="Ir a sección Qué hacemos">Qué hacemos</a>
 <a class="site-header__link hover:text-primary transition-colors" href="#como-trabajamos" aria-label="Ir a sección Cómo trabajamos">Cómo trabajamos</a>
 <a class="site-header__link hover:text-primary transition-colors" href="#clientes" aria-label="Ir a sección A quiénes trabajamos">Clientes</a>
+<a class="site-header__link hover:text-primary transition-colors" href="#agenda" aria-label="Ir a sección Agenda y reservas">Agenda</a>
 <a class="nav-music-link hover:text-primary transition-colors inline-flex items-center gap-1.5" href="#canciones" aria-label="Ir a sección Cotizar canciones"><span class="material-symbols-outlined text-[13px]" aria-hidden="true">music_note</span>Cotizar canciones</a>
 </nav>
 </div>
@@ -142,6 +146,7 @@
 <a class="site-header__link hover:text-primary transition-colors" href="#que-hacemos" aria-label="Ir a sección Qué hacemos">Qué hacemos</a>
 <a class="site-header__link hover:text-primary transition-colors" href="#como-trabajamos" aria-label="Ir a sección Cómo trabajamos">Cómo trabajamos</a>
 <a class="site-header__link hover:text-primary transition-colors" href="#clientes" aria-label="Ir a sección A quiénes trabajamos">Clientes</a>
+<a class="site-header__link hover:text-primary transition-colors" href="#agenda" aria-label="Ir a sección Agenda y reservas">Agenda</a>
 <a class="nav-music-link hover:text-primary transition-colors inline-flex items-center gap-1.5" href="#canciones" aria-label="Ir a sección Cotizar canciones"><span class="material-symbols-outlined text-[13px]" aria-hidden="true">music_note</span>Cotizar canciones</a>
 </div>
 </nav>
@@ -187,9 +192,7 @@ Hablemos por WhatsApp
 <span class="hero-waveform-glow"></span>
 <div id="hero-audio-reactive" class="hero-audio-console" data-audio-state="idle">
 <div class="hero-audio-console__activate-cluster">
-<p id="hero-audio-ambiente-policy" class="hero-audio-console__policy" aria-live="polite">
-Para que el analizador reaccione al sonido real de tu entorno (voz, música, ruido de la sala), el navegador necesita permiso de micrófono. Solo puede pedírtelo de forma segura tras un gesto tuyo en esta página: es una política de seguridad del propio navegador, no del sitio. El audio se analiza solo en tu dispositivo para animar estas ondas; no se graba ni se envía a ningún servidor.
-</p>
+<p id="hero-audio-ambiente-policy" class="hero-audio-console__policy" aria-live="polite"></p>
 <span id="hero-audio-live-indicator" class="hero-audio-console__indicator" aria-live="polite" hidden>Escuchando ambiente</span>
 <button type="button" id="hero-audio-enable" class="hero-audio-console__enable" aria-describedby="hero-audio-ambiente-policy">
 Activar sonido ambiente
@@ -218,9 +221,6 @@ Activar sonido ambiente
 <svg class="hero-audio-console__wave hero-audio-console__wave--floor" viewBox="0 0 520 100" preserveAspectRatio="none" aria-hidden="true">
 <path id="hero-audio-floor-wave" class="hero-audio-wave hero-audio-wave--secondary" d=""></path>
 </svg>
-<div class="hero-audio-console__signal-dots">
-<span class="hero-audio-dot"></span><span class="hero-audio-dot"></span><span class="hero-audio-dot"></span>
-</div>
 </div>
 </div>
 </div>
@@ -442,6 +442,114 @@ Activar sonido ambiente
 </p>
 </div>
 </section>
+<!-- Agenda — selector visual (Google Calendar / confirmación por correo desde Google) -->
+<section class="booking-agenda py-14 sm:py-16 md:py-20 px-6 border-t border-white/5" id="agenda" aria-labelledby="agenda-heading">
+<div class="max-w-6xl mx-auto">
+<div class="booking-agenda__intro text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+<p class="text-primary font-bold tracking-[0.2em] text-[0.66rem] uppercase mb-3">Reservas</p>
+<h2 id="agenda-heading" class="serif-heading text-[clamp(1.65rem,4.2vw,2.35rem)] mb-4 italic leading-tight text-[var(--n-ink-100)]">Agenda tu asesoría</h2>
+<p class="text-subtle text-sm sm:text-[0.95rem] leading-relaxed font-light">
+Elige el día y completa el horario en el calendario: el hueco queda reservado y recibes la confirmación por correo automáticamente.
+</p>
+</div>
+<div id="schedule-widget" class="schedule-panel">
+<div class="schedule-card schedule-card--split">
+<div class="schedule-card__sidebar">
+<button type="button" class="schedule-sidebar-back" id="schedule-sidebar-back" hidden aria-label="Volver al calendario">
+<span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+</button>
+<a
+  class="schedule-card__host"
+  href="mailto:Diegoarizamedina@gmail.com"
+  rel="noopener"
+  aria-label="Enviar correo a Diego Ariza Medina">Diego Ariza Medina</a>
+<h3 class="schedule-card__title">Sesión NIEBLA</h3>
+<div class="schedule-card__meta">
+<span class="schedule-card__meta-row">
+<span class="material-symbols-outlined schedule-card__icon" aria-hidden="true">schedule</span>
+<span>1&nbsp;hora</span>
+</span>
+<span class="schedule-card__meta-row">
+<span class="material-symbols-outlined schedule-card__icon" aria-hidden="true">videocam</span>
+<span>Detalles de la videollamada se envían al confirmar la cita.</span>
+</span>
+</div>
+<div class="schedule-choice-summary" id="schedule-choice-summary" hidden>
+<span class="schedule-card__meta-row">
+<span class="material-symbols-outlined schedule-card__icon" aria-hidden="true">calendar_month</span>
+<span id="schedule-summary-slot-line"></span>
+</span>
+<span class="schedule-card__meta-row">
+<span class="material-symbols-outlined schedule-card__icon" aria-hidden="true">public</span>
+<span id="schedule-summary-tz-line"></span>
+</span>
+</div>
+</div>
+<div class="schedule-card__main">
+<div class="schedule-main-picker" id="schedule-main-picker">
+<p class="schedule-card__picker-title" id="schedule-picker-heading">Elige fecha y hora</p>
+<div class="schedule-picker__cols" id="schedule-picker-cols">
+<div class="schedule-picker__calendar">
+<p class="schedule-card__section-label schedule-card__section-label--sub" id="schedule-select-day-label">Elige un día</p>
+<p class="schedule-cal__hint">Domingos y festivos nacionales de Colombia cerrados · reserva con <strong class="schedule-cal__hint-strong">al menos un día</strong> de anticipación respecto de hoy.</p>
+<div class="schedule-cal__toolbar">
+<button type="button" class="schedule-cal__nav-btn" id="schedule-prev-month" aria-label="Mes anterior">
+<span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+</button>
+<p class="schedule-cal__month" id="schedule-month-label" aria-live="polite">—</p>
+<button type="button" class="schedule-cal__nav-btn" id="schedule-next-month" aria-label="Mes siguiente">
+<span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+</button>
+</div>
+<div class="schedule-cal__weekdays" aria-hidden="true">
+<span>DOM</span><span>LUN</span><span>MAR</span><span>MIE</span><span>JUE</span><span>VIE</span><span>SÁB</span>
+</div>
+<div class="schedule-cal__grid" id="schedule-calendar-grid" role="grid" aria-labelledby="schedule-picker-heading schedule-select-day-label"></div>
+<button type="button" class="schedule-card__primary" id="schedule-open-booking">
+Abrir agenda de reservas
+</button>
+<div class="schedule-card__tz-row">
+<span class="schedule-card__tz-caption">Zona horaria</span>
+<div class="schedule-card__tz">
+<span class="material-symbols-outlined schedule-card__tz-icon" aria-hidden="true">public</span>
+<span class="schedule-card__tz-text" id="schedule-timezone-label">—</span>
+</div>
+</div>
+</div>
+<div class="schedule-times" id="schedule-times-panel" hidden aria-live="polite">
+<p class="schedule-times__hint" id="schedule-times-hint">Horarios disponibles</p>
+<p class="schedule-times__date" id="schedule-times-date-label"></p>
+<div class="schedule-times__list" id="schedule-times-slots"></div>
+<button type="button" class="schedule-times__continue" id="schedule-continue-btn" hidden>Continuar</button>
+</div>
+</div>
+</div>
+<div class="schedule-main-details" id="schedule-main-details" hidden>
+<h3 class="schedule-details__title" tabindex="-1">Tus datos</h3>
+<form class="schedule-details-form" id="schedule-details-form" novalidate>
+<div class="schedule-field">
+<label class="schedule-field__label" for="schedule-detail-name">Nombre <abbr title="requerido" class="schedule-field__req">*</abbr></label>
+<input class="schedule-field__input" type="text" id="schedule-detail-name" name="nombre" autocomplete="name" required placeholder="Nombre y apellido" aria-describedby="schedule-error-name"/>
+<p class="schedule-field__error" id="schedule-error-name" role="alert" hidden>No puede quedar vacío.</p>
+</div>
+<div class="schedule-field">
+<label class="schedule-field__label" for="schedule-detail-email">Correo <abbr title="requerido" class="schedule-field__req">*</abbr></label>
+<input class="schedule-field__input" type="email" id="schedule-detail-email" name="correo" autocomplete="email" required placeholder="correo@ejemplo.com" inputmode="email" aria-describedby="schedule-error-email"/>
+<p class="schedule-field__error" id="schedule-error-email" role="alert" hidden>No puede quedar vacío.</p>
+</div>
+<div class="schedule-field">
+<label class="schedule-field__label" for="schedule-detail-notes">Notas <span class="schedule-field__optional">(opcional)</span></label>
+<textarea class="schedule-field__textarea" id="schedule-detail-notes" name="notas" rows="4" placeholder="Comparte lo que ayude a preparar la reunión."></textarea>
+</div>
+<p class="schedule-details-form__legal">Nombre y correo son obligatorios. Al pulsar <strong class="font-normal text-[var(--n-ink-100)]">Programar reunión</strong> se abre tu aplicación de correo con el mensaje listado: solo tenés que enviarlo. Vas en copia (CC) para que te quede el mismo correo en tu bandeja. La confirmación final de la reunión la coordina NIEBLA.</p>
+<button type="submit" class="schedule-details-form__submit">Programar reunión</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 <!-- Compromiso & Final CTA -->
 <section class="relative py-20 sm:py-24 md:py-28 px-6 overflow-hidden">
 <div class="absolute inset-0 bg-primary/5"></div>
@@ -466,8 +574,8 @@ Activar sonido ambiente
 <div class="footer-premium__row">
 <div class="footer-premium__brand">
 <img
-  alt="NIEBLA SOUND-BRANDING"
-  class="h-14 sm:h-16 w-auto opacity-95"
+  alt="NIEBLA SOUND BRANDING"
+  class="brand-mark-logo brand-mark-logo--footer"
   src="./assets/img/NIEBLA%20SOUND-BRANDING.png?v=2"
   onerror="this.src='./assets/img/NIEBLA.png'"
   width="212"
