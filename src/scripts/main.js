@@ -44,6 +44,444 @@ const SCHEDULE_CO_HOLIDAYS = {
   ]),
 };
 
+/**
+ * Vinyl + artwork interaction for the closing section (native port of the React demo).
+ * @param {HTMLElement} root
+ */
+function initNieblaMusicArtwork(root) {
+  const tooltip = document.getElementById("niebla-music-artwork-tooltip");
+  const tooltipInner = tooltip?.querySelector(".music-artwork__tooltip-inner");
+  const vinylSpin = document.getElementById("niebla-music-artwork-vinyl");
+  const cover = document.getElementById("niebla-music-artwork-cover");
+  const coverImg = root.querySelector(".music-artwork__cover-img");
+  const skeleton = document.getElementById("niebla-music-artwork-skeleton");
+  const mobileMeta = root.querySelector(".music-artwork__mobile-meta-inner");
+
+  if (
+    !tooltip ||
+    !tooltipInner ||
+    !vinylSpin ||
+    !cover ||
+    !(coverImg instanceof HTMLImageElement) ||
+    !skeleton ||
+    !mobileMeta
+  ) {
+    return;
+  }
+
+  const artist = root.dataset.artist ?? "NIEBLA";
+  const title = root.dataset.title ?? "";
+  const isSong = root.dataset.isSong !== "false";
+
+  const spinDuration = isSong ? 1 / 0.75 : 1 / 0.55;
+
+  tooltipInner.innerHTML =
+    `<span class="music-artwork__artist"></span>\u00A0\u2022\u00A0${title.replace(/</g, "&lt;")}`;
+  const artistSpan = tooltipInner.querySelector(".music-artwork__artist");
+  if (artistSpan) artistSpan.textContent = artist;
+
+  mobileMeta.innerHTML =
+    `<span class="music-artwork__artist"></span> \u2022 ${title.replace(/</g, "&lt;")}`;
+  const mobArtist = mobileMeta.querySelector(".music-artwork__artist");
+  if (mobArtist) mobArtist.textContent = artist;
+
+  let mouseX = 0;
+  let mouseY = 0;
+  let rafMove = 0;
+  const prefersReducedMotion =
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let isPlaying = !prefersReducedMotion;
+  let rotation = 0;
+
+  if (isPlaying) {
+    root.classList.add("is-playing");
+    cover.setAttribute("aria-pressed", "true");
+  } else {
+    root.classList.remove("is-playing");
+    cover.setAttribute("aria-pressed", "false");
+  }
+
+  const getRotationDegrees = (el) => {
+    const tr = window.getComputedStyle(el).transform;
+    if (!tr || tr === "none") return 0;
+    let m;
+    try {
+      m = typeof DOMMatrix !== "undefined" ? new DOMMatrix(tr) : null;
+    } catch {
+      m = null;
+    }
+    if (!m) return 0;
+    const angle = Math.atan2(m.b, m.a) * (180 / Math.PI);
+    return angle < 0 ? angle + 360 : angle;
+  };
+
+  const applyVinylMotion = () => {
+    if (isPlaying) {
+      vinylSpin.style.transform = "";
+      vinylSpin.style.animation = `music-artwork-spin ${spinDuration}s linear infinite`;
+      vinylSpin.style.animationDelay = `${-rotation / (360 / spinDuration)}s`;
+    } else {
+      vinylSpin.style.animation = "none";
+      vinylSpin.style.transform = `rotate(${rotation}deg)`;
+    }
+  };
+
+  const setTooltipPosition = (clientX, clientY) => {
+    const tooltipWidth = 300;
+    const tooltipHeight = 60;
+    const offset = 20;
+    let x = clientX + offset;
+    let y = clientY - tooltipHeight - 10;
+    if (x + tooltipWidth > window.innerWidth) {
+      x = clientX - tooltipWidth - offset;
+    }
+    if (y < 0) {
+      y = clientY + offset;
+    }
+    if (y + tooltipHeight > window.innerHeight) {
+      y = clientY - tooltipHeight - offset;
+    }
+    tooltip.style.left = `${x}px`;
+    tooltip.style.top = `${y}px`;
+  };
+
+  const onDocMove = (e) => {
+    if (rafMove) cancelAnimationFrame(rafMove);
+    rafMove = requestAnimationFrame(() => {
+      setTooltipPosition(e.clientX, e.clientY);
+    });
+  };
+
+  const onCoverEnter = () => {
+    root.classList.add("is-hovered");
+    tooltip.hidden = false;
+    setTooltipPosition(mouseX, mouseY);
+    document.addEventListener("mousemove", onDocMove, { passive: true });
+  };
+
+  const onCoverLeave = () => {
+    root.classList.remove("is-hovered");
+    tooltip.hidden = true;
+    document.removeEventListener("mousemove", onDocMove);
+    if (rafMove) {
+      cancelAnimationFrame(rafMove);
+      rafMove = 0;
+    }
+  };
+
+  const togglePlay = () => {
+    if (isPlaying) {
+      rotation = getRotationDegrees(vinylSpin);
+    }
+    isPlaying = !isPlaying;
+    root.classList.toggle("is-playing", isPlaying);
+    cover.setAttribute("aria-pressed", isPlaying ? "true" : "false");
+    applyVinylMotion();
+  };
+
+  cover.addEventListener("mouseenter", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    onCoverEnter();
+  });
+  cover.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+  cover.addEventListener("mouseleave", onCoverLeave);
+  cover.addEventListener("click", () => {
+    togglePlay();
+  });
+
+  const onImgLoad = () => {
+    coverImg.classList.remove("is-loading");
+    skeleton.classList.add("is-hidden");
+  };
+
+  if (coverImg.complete && coverImg.naturalWidth > 0) {
+    onImgLoad();
+  } else {
+    coverImg.classList.add("is-loading");
+    coverImg.addEventListener("load", onImgLoad, { once: true });
+    coverImg.addEventListener(
+      "error",
+      () => {
+        onImgLoad();
+      },
+      { once: true }
+    );
+  }
+
+  applyVinylMotion();
+}
+
+const formatProductionAudioTime = (seconds) => {
+  const s = typeof seconds === "number" ? seconds : 0;
+  if (!Number.isFinite(s) || s < 0) return "0:00";
+  const m = Math.floor(s / 60);
+  const r = Math.floor(s % 60);
+  return `${m}:${String(r).padStart(2, "0")}`;
+};
+
+function initProductionDemoCards() {
+  const roots = Array.from(document.querySelectorAll("[data-audio-demo]"));
+  /** @type {HTMLAudioElement[]} */
+  const siblingAudios = roots
+    .map((r) => r.querySelector(".audio-demo-card__audio"))
+    .filter((a) => a instanceof HTMLAudioElement);
+
+  roots.forEach((cardEl) => {
+    const audio =
+      /** @type {HTMLAudioElement | null} */ (cardEl.querySelector(".audio-demo-card__audio"));
+    const seekBar = cardEl.querySelector("[data-audio-seek-bar]");
+    const fill = cardEl.querySelector("[data-audio-fill]");
+    const curEl = cardEl.querySelector("[data-audio-cur]");
+    const durEl = cardEl.querySelector("[data-audio-dur]");
+    const playBtn = cardEl.querySelector("[data-audio-play]");
+    const iconPlay = cardEl.querySelector(".audio-demo-card__icon-play");
+    const iconPause = cardEl.querySelector(".audio-demo-card__icon-pause");
+
+    if (
+      !audio ||
+      !(seekBar instanceof HTMLButtonElement) ||
+      !(fill instanceof HTMLElement) ||
+      !(playBtn instanceof HTMLButtonElement) ||
+      !(iconPlay instanceof HTMLElement) ||
+      !(iconPause instanceof HTMLElement)
+    )
+      return;
+
+    const accent = typeof cardEl.dataset.mainColor === "string" ? cardEl.dataset.mainColor.trim() : "";
+    if (/^#[0-9a-f]{3,8}$/i.test(accent))
+      /** @type {HTMLElement} */ (cardEl).style.setProperty("--audio-accent", accent);
+
+    const pauseOthers = (except) => {
+      siblingAudios.forEach((/** @type {HTMLAudioElement} */ a) => {
+        if (a !== except && !a.paused) void a.pause();
+      });
+    };
+
+    const syncIcons = () => {
+      const playing = !audio.paused;
+      playBtn.setAttribute("aria-label", playing ? "Pausar" : "Reproducir");
+      iconPlay.classList.toggle("hidden", playing);
+      iconPause.classList.toggle("hidden", !playing);
+      cardEl.classList.toggle("is-playing", playing);
+    };
+
+    const refreshBar = () => {
+      let d = audio.duration;
+      if (!Number.isFinite(d)) d = 0;
+      const t = Number.isFinite(audio.currentTime) ? audio.currentTime : 0;
+      const pct = d > 0 ? (t / d) * 100 : 0;
+      fill.style.width = `${pct}%`;
+      if (curEl instanceof HTMLElement) curEl.textContent = formatProductionAudioTime(t);
+      if (durEl instanceof HTMLElement) durEl.textContent = formatProductionAudioTime(d);
+    };
+
+    playBtn.addEventListener("click", () => {
+      if (audio.paused) {
+        pauseOthers(audio);
+        void audio.play().catch(() => {
+          refreshBar();
+        });
+      } else {
+        audio.pause();
+      }
+    });
+
+    audio.addEventListener("play", () => syncIcons());
+    audio.addEventListener("pause", () => syncIcons());
+    audio.addEventListener("loadedmetadata", () => refreshBar());
+    audio.addEventListener("durationchange", () => refreshBar());
+    audio.addEventListener("timeupdate", () => refreshBar());
+    audio.addEventListener("ended", () => {
+      refreshBar();
+      syncIcons();
+    });
+
+    seekBar.addEventListener("click", (e) => {
+      const rect = seekBar.getBoundingClientRect();
+      const d = audio.duration;
+      if (!Number.isFinite(d) || d <= 0) return;
+      const x = e.clientX - rect.left;
+      const ratio = rect.width ? x / rect.width : 0;
+      const bounded = Math.min(1, Math.max(0, ratio));
+      audio.currentTime = bounded * d;
+      refreshBar();
+    });
+
+    cardEl.querySelectorAll("[data-audio-skip]").forEach((btn) => {
+      if (!(btn instanceof HTMLButtonElement)) return;
+      btn.addEventListener("click", () => {
+        const raw = btn.getAttribute("data-audio-skip");
+        const amt = Number.parseInt(raw ?? "0", 10);
+        const d = audio.duration;
+        const cur = audio.currentTime;
+
+        let next = cur + (Number.isFinite(amt) ? amt : 0);
+        if (Number.isFinite(d) && d > 0) next = Math.min(d, Math.max(0, next));
+        else next = Math.max(0, next);
+        audio.currentTime = next;
+        refreshBar();
+      });
+    });
+
+    refreshBar();
+    syncIcons();
+  });
+}
+
+function initEqDemoPanel() {
+  const root = document.getElementById("niebla-eq-demo");
+  if (!root) return;
+
+  const clampLoHi = (n, lo, hi) => Math.min(hi, Math.max(lo, n));
+
+  /**
+   * @param {HTMLElement} rail
+   * @param {HTMLElement} thumb
+   * @param {HTMLElement | null} filled
+   * @param {HTMLElement | null} tip
+   * @param {HTMLElement} bandEl
+   */
+  const attachBand = (rail, thumb, filled, tip, bandEl) => {
+    const lo = Number.parseInt(rail.getAttribute("aria-valuemin") ?? "-5", 10);
+    const hi = Number.parseInt(rail.getAttribute("aria-valuemax") ?? "5", 10);
+    const init = Number.parseInt(rail.dataset.eqInit ?? "0", 10);
+    let value = clampLoHi(Number.isFinite(init) ? init : 0, lo, hi);
+
+    let dragging = false;
+    /** @type {ReturnType<typeof setTimeout> | null} */
+    let tipFlash = null;
+
+    const showTipHeld = () => bandEl.classList.add("eq-demo__band--tip");
+
+    const hideTipHeld = () => bandEl.classList.remove("eq-demo__band--tip");
+
+    const flashTooltipKb = () => {
+      showTipHeld();
+      if (tipFlash !== null) window.clearTimeout(tipFlash);
+      tipFlash = window.setTimeout(() => {
+        hideTipHeld();
+        tipFlash = null;
+      }, 520);
+    };
+
+    const applyVisual = () => {
+      value = clampLoHi(value, lo, hi);
+      const span = hi - lo;
+      const pctFromBottom = span > 0 ? ((value - lo) / span) * 100 : 50;
+      thumb.style.bottom = `${pctFromBottom}%`;
+      thumb.style.transform = "translate(-50%, 50%)";
+      if (filled) filled.style.height = `${pctFromBottom}%`;
+      rail.setAttribute("aria-valuenow", String(value));
+      rail.setAttribute("aria-valuetext", String(value));
+      if (tip) tip.textContent = String(value);
+    };
+
+    /** @param {number} clientY */
+    const setFromPointerY = (clientY) => {
+      const rect = rail.getBoundingClientRect();
+      if (rect.height <= 0) return;
+      const ratioFromBottom = (rect.bottom - clientY) / rect.height;
+      const raw = ratioFromBottom * (hi - lo) + lo;
+      value = clampLoHi(Math.round(raw), lo, hi);
+      applyVisual();
+    };
+
+    applyVisual();
+
+    rail.addEventListener(
+      "pointerdown",
+      (e) => {
+        try {
+          rail.focus({ preventScroll: true });
+        } catch {
+          rail.focus();
+        }
+        e.preventDefault();
+        dragging = true;
+        try {
+          rail.setPointerCapture(e.pointerId);
+        } catch {
+          /* ignore capture errors */
+        }
+        showTipHeld();
+        setFromPointerY(e.clientY);
+      },
+      { passive: false }
+    );
+
+    rail.addEventListener("pointermove", (e) => {
+      if (!dragging) return;
+      setFromPointerY(e.clientY);
+    });
+
+    const endDrag = (e) => {
+      if (!dragging) return;
+      dragging = false;
+      hideTipHeld();
+      if (typeof e.pointerId === "number") {
+        try {
+          rail.releasePointerCapture(e.pointerId);
+        } catch {
+          /* noop */
+        }
+      }
+    };
+
+    rail.addEventListener("pointerup", endDrag);
+    rail.addEventListener("pointercancel", () => {
+      dragging = false;
+      hideTipHeld();
+    });
+
+    rail.addEventListener("keydown", (e) => {
+      let stepped = false;
+      if (e.key === "ArrowUp" || e.key === "ArrowRight") {
+        value = clampLoHi(value + 1, lo, hi);
+        stepped = true;
+      } else if (e.key === "ArrowDown" || e.key === "ArrowLeft") {
+        value = clampLoHi(value - 1, lo, hi);
+        stepped = true;
+      } else if (e.key === "Home") {
+        value = lo;
+        stepped = true;
+      } else if (e.key === "End") {
+        value = hi;
+        stepped = true;
+      } else if (e.key === "PageUp") {
+        value = clampLoHi(value + 2, lo, hi);
+        stepped = true;
+      } else if (e.key === "PageDown") {
+        value = clampLoHi(value - 2, lo, hi);
+        stepped = true;
+      }
+      if (!stepped) return;
+      e.preventDefault();
+      applyVisual();
+      flashTooltipKb();
+    });
+  };
+
+  root.querySelectorAll("[data-eq-band]").forEach((bandEl) => {
+    if (!(bandEl instanceof HTMLElement)) return;
+
+    const rail = bandEl.querySelector("[data-eq-rail]");
+    const thumb = bandEl.querySelector("[data-eq-thumb]");
+    const filledEl = bandEl.querySelector(".eq-demo__filled");
+    const tipEl = bandEl.querySelector("[data-eq-tooltip]");
+    const filled =
+      filledEl instanceof HTMLElement ? filledEl : null;
+    const tip = tipEl instanceof HTMLElement ? tipEl : null;
+
+    if (!(rail instanceof HTMLElement) || !(thumb instanceof HTMLElement)) return;
+    attachBand(rail, thumb, filled, tip, bandEl);
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const openExternalBooking = () => {
     const url = typeof GOOGLE_BOOKING_URL === "string" ? GOOGLE_BOOKING_URL.trim() : "";
@@ -1243,6 +1681,13 @@ document.addEventListener("DOMContentLoaded", () => {
     quienesSonicConsole.addEventListener("touchcancel", resetQuienesInteraction, { passive: true });
     quienesSonicWave.addEventListener("pointerenter", onQuienesConsoleEnter, { passive: true });
   }
+
+  const nieblaMusicArtwork = document.getElementById("niebla-music-artwork");
+  if (nieblaMusicArtwork) initNieblaMusicArtwork(nieblaMusicArtwork);
+
+  initProductionDemoCards();
+
+  initEqDemoPanel();
 
   if (!supportsAudio) setFallbackStatic();
   else setConsoleState("idle");

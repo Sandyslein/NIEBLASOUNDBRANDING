@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="280" height="280" aria-hidden="true">
+  <defs>
+    <radialGradient id="nieblaVinylGroove" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#262626"/>
+      <stop offset="55%" stop-color="#121212"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
+    </radialGradient>
+  </defs>
+  <circle cx="100" cy="100" r="99" fill="url(#nieblaVinylGroove)" stroke="#1f1f1f" stroke-width="1"/>
+  <g fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.6">
+    <circle cx="100" cy="100" r="90"/>
+    <circle cx="100" cy="100" r="82"/>
+    <circle cx="100" cy="100" r="74"/>
+    <circle cx="100" cy="100" r="66"/>
+    <circle cx="100" cy="100" r="58"/>
+    <circle cx="100" cy="100" r="50"/>
+    <circle cx="100" cy="100" r="42"/>
+  </g>
+  <circle cx="100" cy="100" r="32" fill="#1a1a1a" stroke="rgba(161,18,23,0.55)" stroke-width="1.5"/>
+  <circle cx="100" cy="100" r="24" fill="#141414" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+  <circle cx="100" cy="100" r="5.5" fill="#080808" stroke="#2a2a2a" stroke-width="0.75"/>
+</svg>
