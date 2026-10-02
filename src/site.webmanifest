@@ -8,9 +8,10 @@
   "theme_color": "#0A0A0A",
   "icons": [
     {
-      "src": "https://nieblasoundbranding.com/assets/img/NIEBLA%20SOUND-BRANDING.png?v=3",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "./assets/icons/favicon.svg?v=4",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ]
 }

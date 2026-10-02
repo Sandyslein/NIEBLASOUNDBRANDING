@@ -1073,24 +1073,46 @@ document.addEventListener("DOMContentLoaded", () => {
     ? closingTypewriterHost.querySelector(".closing-typewriter__target")
     : null;
   if (closingTypewriterHost && closingTypewriterTarget) {
-    const closingTypewriterText = "No es audio. Es percepción que activa decisiones.";
+    const closingTypewriterSegments = [
+      { text: "No es audio. " },
+      { text: "Es percepción que activa decisiones.", tag: "i" },
+    ];
+    const closingTypewriterText = closingTypewriterSegments.map((segment) => segment.text).join("");
     const closingMotionOk = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let closingTyped = false;
     let closingTimer = 0;
+
+    const renderClosingTyped = (charCount) => {
+      let remaining = charCount;
+      const nodes = [];
+      closingTypewriterSegments.forEach((segment) => {
+        if (remaining <= 0) return;
+        const chunk = segment.text.slice(0, remaining);
+        remaining -= chunk.length;
+        if (!segment.tag) {
+          nodes.push(chunk);
+          return;
+        }
+        const el = document.createElement(segment.tag);
+        el.textContent = chunk;
+        nodes.push(el);
+      });
+      closingTypewriterTarget.replaceChildren(...nodes);
+    };
 
     const runClosingTypewriter = () => {
       if (closingTyped) return;
       closingTyped = true;
       window.clearTimeout(closingTimer);
       if (!closingMotionOk) {
-        closingTypewriterTarget.textContent = closingTypewriterText;
+        renderClosingTyped(closingTypewriterText.length);
         return;
       }
       let index = 0;
-      closingTypewriterTarget.textContent = "";
+      renderClosingTyped(0);
       const step = () => {
         index += 1;
-        closingTypewriterTarget.textContent = closingTypewriterText.slice(0, index);
+        renderClosingTyped(index);
         if (index < closingTypewriterText.length) {
           closingTimer = window.setTimeout(step, 24);
         }
