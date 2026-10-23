@@ -2,6 +2,9 @@
   "name": "niebla-sound-branding",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
     "start": "npm run dev",
     "dev": "http-server src -p 3000 -c-1",
